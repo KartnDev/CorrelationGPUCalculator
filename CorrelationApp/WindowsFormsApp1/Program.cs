@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.Math.Statistics;
+using MathNet.Numerics.Random;
+using MathNet.Numerics.Statistics;
 
 namespace WindowsFormsApp1
 {
