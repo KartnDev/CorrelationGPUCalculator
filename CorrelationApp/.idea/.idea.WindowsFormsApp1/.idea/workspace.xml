@@ -24,14 +24,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b492883a-46f0-4598-8252-a4da2b8ab59d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1.sln" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Math/Statistics/Correlations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Math/Statistics/Correlations.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" afterDir="false" />
     </list>
@@ -120,7 +115,7 @@
       <updated>1604154629314</updated>
       <workItem from="1604154631203" duration="640000" />
       <workItem from="1604155380265" duration="3165000" />
-      <workItem from="1604160947756" duration="6376000" />
+      <workItem from="1604160947756" duration="9416000" />
     </task>
     <servers />
   </component>
@@ -153,22 +148,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="409" height="464" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1604170256362" />
-    <state width="1877" height="375" key="GridCell.Tab.0.bottom" timestamp="1604170257755">
+    <state width="1877" height="436" key="GridCell.Tab.0.bottom" timestamp="1604180535629">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604170257755" />
-    <state width="1877" height="375" key="GridCell.Tab.0.center" timestamp="1604170257755">
+    <state width="1877" height="436" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604180535629" />
+    <state width="1877" height="436" key="GridCell.Tab.0.center" timestamp="1604180535629">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604170257755" />
-    <state width="1877" height="375" key="GridCell.Tab.0.left" timestamp="1604170257755">
+    <state width="1877" height="436" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604180535629" />
+    <state width="1877" height="436" key="GridCell.Tab.0.left" timestamp="1604180535629">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604170257755" />
-    <state width="1877" height="375" key="GridCell.Tab.0.right" timestamp="1604170257755">
+    <state width="1877" height="436" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604180535629" />
+    <state width="1877" height="436" key="GridCell.Tab.0.right" timestamp="1604180535629">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604170257755" />
+    <state width="1877" height="436" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604180535629" />
     <state width="1877" height="375" key="GridCell.Tab.1.bottom" timestamp="1604170257755">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
