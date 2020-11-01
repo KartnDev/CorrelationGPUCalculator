@@ -8,12 +8,20 @@
       <e p="WindowsFormsApp1" t="IncludeRecursive">
         <e p="App.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
+        <e p="DeviceComputes" t="Include">
+          <e p="CPUCompute.cs" t="Include" />
+          <e p="CUDACompute.cs" t="Include" />
+          <e p="IComputeDevice.cs" t="Include" />
+          <e p="OpenBLASCompute.cs" t="Include" />
+          <e p="ResultWrapper.cs" t="Include" />
+        </e>
         <e p="Form1.cs" t="Include" />
         <e p="Form1.Designer.cs" t="Include" />
         <e p="Form1.resx" t="Include" />
         <e p="Math" t="Include">
           <e p="Statistics" t="Include">
             <e p="Correlations.cs" t="Include" />
+            <e p="RankFinder.cs" t="Include" />
           </e>
         </e>
         <e p="obj" t="ExcludeRecursive" />
@@ -25,6 +33,18 @@
           <e p="Resources.resx" t="Include" />
           <e p="Settings.Designer.cs" t="Include" />
           <e p="Settings.settings" t="Include" />
+        </e>
+        <e p="Readme" t="Include">
+          <e p="CUDA.NET.Readme.txt" t="Include" />
+          <e p="CUDAfy-License.txt" t="Include" />
+          <e p="example_source_code.cs.txt" t="Include" />
+          <e p="ILSpy-license.txt" t="Include" />
+          <e p="README.txt" t="Include" />
+        </e>
+        <e p="Tools" t="Include">
+          <e p="cudafycl.exe" t="Include" />
+          <e p="CudafyViewer.exe" t="Include" />
+          <e p="place_these_executables_in_same_folder_as_Cudafy.NET.dll_" t="Include" />
         </e>
         <e p="Utils" t="Include">
           <e p="ListExtensions.cs" t="Include" />

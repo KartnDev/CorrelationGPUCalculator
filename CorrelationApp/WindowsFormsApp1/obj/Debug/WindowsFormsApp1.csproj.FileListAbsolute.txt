@@ -34,3 +34,5 @@ C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\Correla
 C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
 C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\bin\Debug\Cudafy.NET.dll
+C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\bin\Debug\Cudafy.NET.xml
