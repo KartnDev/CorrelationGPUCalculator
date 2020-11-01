@@ -23,5 +23,6 @@ namespace WindowsFormsApp1.Math.Statistics
 
             return 1.0 - (6.0 * sum) / (n * n * n - n);
         }
+        
     }
 }

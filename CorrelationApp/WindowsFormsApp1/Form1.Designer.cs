@@ -36,6 +36,7 @@
             this.shiftLabel = new System.Windows.Forms.Label();
             this.batchSizeLabel = new System.Windows.Forms.Label();
             this.BatchSizeBox = new System.Windows.Forms.TextBox();
+            this.DeviceListBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize) (this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(129, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(259, 342);
+            this.dataGridView1.Size = new System.Drawing.Size(457, 342);
             this.dataGridView1.TabIndex = 1;
             // 
             // button2
@@ -75,10 +76,11 @@
             this.computeDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.computeDevice.FormattingEnabled = true;
             this.computeDevice.Items.AddRange(new object[] {"CPU_Parallel", "OpenBLAS", "GPU_CUDA"});
-            this.computeDevice.Location = new System.Drawing.Point(616, 12);
+            this.computeDevice.Location = new System.Drawing.Point(592, 12);
             this.computeDevice.Name = "computeDevice";
-            this.computeDevice.Size = new System.Drawing.Size(172, 21);
+            this.computeDevice.Size = new System.Drawing.Size(195, 21);
             this.computeDevice.TabIndex = 3;
+            this.computeDevice.SelectedIndexChanged += new System.EventHandler(this.computeDevice_SelectedIndexChanged);
             // 
             // shiftBox
             // 
@@ -114,11 +116,22 @@
             this.BatchSizeBox.TabIndex = 7;
             this.BatchSizeBox.Text = "1000";
             // 
+            // DeviceListBox
+            // 
+            this.DeviceListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DeviceListBox.Location = new System.Drawing.Point(592, 53);
+            this.DeviceListBox.Multiline = true;
+            this.DeviceListBox.Name = "DeviceListBox";
+            this.DeviceListBox.ReadOnly = true;
+            this.DeviceListBox.Size = new System.Drawing.Size(195, 109);
+            this.DeviceListBox.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.DeviceListBox);
             this.Controls.Add(this.BatchSizeBox);
             this.Controls.Add(this.batchSizeLabel);
             this.Controls.Add(this.shiftLabel);
@@ -133,6 +146,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.TextBox DeviceListBox;
 
         private System.Windows.Forms.Label batchSizeLabel;
 

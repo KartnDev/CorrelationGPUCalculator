@@ -8,7 +8,7 @@ namespace WindowsFormsApp1.DeviceComputes
     public class CpuComputeDevice : ResultWrapper, IComputeDevice
     {
         public int MaxParallelDegree { get; set; } = 24;
-        public int RoundValue { get; set; } = 2;
+        public int RoundValue { get; set; }
         
         private readonly List<double[,]> _resultShiftsList = new List<double[,]>();
         

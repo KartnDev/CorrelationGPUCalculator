@@ -9,3 +9,5 @@ C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\Correla
 C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\obj\ReleaseFast\WindowsFormsApp1.csproj.CoreCompileInputs.cache
 C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\obj\ReleaseFast\WindowsFormsApp1.csproj.CopyComplete
 C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\obj\ReleaseFast\WindowsFormsApp1.exe
+C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\bin\ReleaseFast\Cudafy.NET.dll
+C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\bin\ReleaseFast\Cudafy.NET.xml
