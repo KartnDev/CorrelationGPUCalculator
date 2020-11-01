@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using MathNet;
 
@@ -10,7 +12,7 @@ namespace WindowsFormsApp1.DeviceComputes
         public int MaxParallelDegree { get; set; } = 24;
         public int RoundValue { get; set; } = 2;
         
-        private readonly List<double[,]> _resultShiftsList = new List<double[,]>();
+        private readonly ConcurrentBag<double[,]> _resultShiftsList = new ConcurrentBag<double[,]>(); // TODO Is dense need ?
         public OpenBLASCompute(string outputFolder, string prevName) : base(outputFolder, prevName)
         {
         }
@@ -31,7 +33,7 @@ namespace WindowsFormsApp1.DeviceComputes
                     SplitByBatches(currentShift, 1000);
                 });
             
-            WriteMatrixesToFile(_resultShiftsList, batchSize, shiftWidth);
+            WriteMatrixesToFile(_resultShiftsList.ToList(), batchSize, shiftWidth);
         }
 
 
