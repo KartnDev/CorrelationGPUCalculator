@@ -23,21 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b492883a-46f0-4598-8252-a4da2b8ab59d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.resx" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.resx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.GenerateResource.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.GenerateResource.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/packages.config" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,15 +65,15 @@
         <option value="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/9d/d17c31a9/Correlation.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Program.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Math/Statistics/Correlations.cs" />
-        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/ICompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Math/Statistics/RankFinder.cs" />
-        <option value="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Utils/FileWriter.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/ResultWrapper.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" />
-        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/OpenBLASCompute.cs" />
+        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" />
+        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" />
+        <option value="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" />
       </list>
     </option>
   </component>
@@ -137,7 +129,7 @@
       <workItem from="1604155380265" duration="3165000" />
       <workItem from="1604160947756" duration="10561000" />
       <workItem from="1604181786188" duration="366000" />
-      <workItem from="1604227298463" duration="5316000" />
+      <workItem from="1604227298463" duration="6368000" />
     </task>
     <servers />
   </component>
@@ -170,22 +162,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="409" height="464" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1604170256362" />
-    <state width="1860" height="226" key="GridCell.Tab.0.bottom" timestamp="1604230084169">
+    <state width="1860" height="226" key="GridCell.Tab.0.bottom" timestamp="1604233712638">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="226" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604230084169" />
-    <state width="1860" height="226" key="GridCell.Tab.0.center" timestamp="1604230084169">
+    <state width="1860" height="226" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604233712638" />
+    <state width="1860" height="226" key="GridCell.Tab.0.center" timestamp="1604233712638">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="226" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604230084169" />
-    <state width="1860" height="226" key="GridCell.Tab.0.left" timestamp="1604230084169">
+    <state width="1860" height="226" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604233712638" />
+    <state width="1860" height="226" key="GridCell.Tab.0.left" timestamp="1604233712638">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="226" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604230084169" />
-    <state width="1860" height="226" key="GridCell.Tab.0.right" timestamp="1604230084169">
+    <state width="1860" height="226" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604233712638" />
+    <state width="1860" height="226" key="GridCell.Tab.0.right" timestamp="1604233712638">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="226" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604230084169" />
+    <state width="1860" height="226" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604233712638" />
     <state width="1860" height="371" key="GridCell.Tab.1.bottom" timestamp="1604230012179">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -250,10 +242,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1860" height="371" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604230012179" />
-    <state x="697" y="221" key="RiderGenerateDialog" timestamp="1604232273700">
+    <state x="697" y="221" key="RiderGenerateDialog" timestamp="1604233421928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="697" y="221" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604232273700" />
+    <state x="697" y="221" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604233421928" />
     <state x="461" y="165" key="SettingsEditor" timestamp="1604165243193">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -266,24 +258,5 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604165555443" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/WindowsFormsApp1/Form1.cs</url>
-          <line>105</line>
-          <properties documentPath="C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\Form1.cs" initialLine="105">
-            <startOffsets>
-              <option value="3056" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3108" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
