@@ -23,10 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b492883a-46f0-4598-8252-a4da2b8ab59d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/kernel.cu" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/kernel.cu" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,7 +141,7 @@
       <workItem from="1604181786188" duration="366000" />
       <workItem from="1604227298463" duration="11962000" />
       <workItem from="1604245174581" duration="9678000" />
-      <workItem from="1604393210441" duration="1825000" />
+      <workItem from="1604393210441" duration="3023000" />
     </task>
     <servers />
   </component>
