@@ -1,8 +1,9 @@
 #include "cuda.h"
 #include "cuda_runtime.h"
 #include <iostream>
+#include <time.h>
 
-__global__ void dot_product_kernel(float *x, float *y, float *dot, unsigned int n)
+__global__ void dot_product_kernel(float *x, float *y, float *num, float *denom, unsigned int n)
 {
 	unsigned int index = threadIdx.x + blockDim.x*blockIdx.x;
 	unsigned int stride = blockDim.x*gridDim.x;
@@ -108,16 +109,60 @@ __global__ void dot_product_kernel(float *x, float *y, float *dot, unsigned int 
 	    i /= 2;
     }
     
+
     if(threadIdx.x == 0)
     {
-		atomicAdd(dot, cache[0] * sqrtf(sum_error_x[0] * sum_error_y[0]));
+        atomicAdd(denom, sqrtf(sum_error_x[0] * sum_error_y[0]));
+        atomicAdd(num, cache[0]);
 	}
 }
 
+float* gpgpu_mat_correlation(float** host_vectors, int count_of_vector, int n)
+{
+    dim3 gridSize = 256;
+    dim3 blockSize = 256;
+
+    float *result = (float*)malloc(count_of_vector * count_of_vector * sizeof(float));   
+    float *temp = (float*)malloc(sizeof(float));
+
+    float *d_prod_num, *d_prod_denom;
+    float *d_x, *d_y;
+
+
+    cudaMalloc((void**)&d_prod_num, sizeof(float));
+    cudaMalloc((void**)&d_prod_denom, sizeof(float));
+    cudaMalloc((void**)&d_x, n*sizeof(float));
+    cudaMalloc((void**)&d_y, n*sizeof(float));
+      
+    
+    for(int i =0; i < count_of_vector; i++)
+    {
+        for(int j =0; j < count_of_vector; j++)
+        {
+            cudaMemset(d_prod_num, 0.0, sizeof(float));
+            cudaMemset(d_prod_denom, 0.0, sizeof(float));
+            cudaMemcpy(d_x, (void*)host_vectors[i], n*sizeof(float), cudaMemcpyHostToDevice);
+            cudaMemcpy(d_y, (void*)host_vectors[j], n*sizeof(float), cudaMemcpyHostToDevice);
+        
+        
+            dot_product_kernel<<<gridSize, blockSize>>>(d_x, d_y, d_prod_num, d_prod_denom, n);
+            cudaMemcpy(&result[i * count_of_vector + j], d_prod_num, sizeof(float), cudaMemcpyDeviceToHost);
+            
+            cudaMemcpy(temp, d_prod_denom, sizeof(float), cudaMemcpyDeviceToHost);
+            result[i * count_of_vector + j] *= powf(*temp, -1);
+        }
+    }
+    
+    
+    return result;
+}
+
+
+
 int main()
 {
-
-    unsigned int n = 10;
+    srand( (unsigned)time(NULL) );
+    unsigned int n = 1 * 256 * 256;
     int signal_count = 2;
         
 
@@ -128,50 +173,25 @@ int main()
         h_x[i] = (float*)malloc(n * sizeof(float));
     }
 
+    for(int i = 0; i < signal_count; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+            h_x[i][j] = float(rand()%n) / n;
+        }
+    }
 
     
-    // fill host array with data
-    // for(int i = 0; i < signal_count; i++)
-    // {
-    //     for(int j = 0; j < n; j++)
-    //     {
-    //         h_x[i][j] = (float)(rand()%n) / n;
-    //     }
-    // }
-
-    h_x[0][0] = 56;  h_x[1][0] = 66;
-    h_x[0][1] = 75;  h_x[1][1] = 70; 
-    h_x[0][2] = 45;  h_x[1][2] = 40; 
-    h_x[0][3] = 71;  h_x[1][3] = 60; 
-    h_x[0][4] = 61;  h_x[1][4] = 65; 
-    h_x[0][5] = 64;  h_x[1][5] = 56; 
-    h_x[0][6] = 58;  h_x[1][6] = 59; 
-    h_x[0][7] = 80;  h_x[1][7] = 77; 
-    h_x[0][8] = 76;  h_x[1][8] = 67;  
-    h_x[0][9] = 61;  h_x[1][9] = 63; 	
-
-    dim3 gridSize = 256;
-    dim3 blockSize = 256;
-
-    float *h_prod = (float*)malloc(sizeof(float));   
-
-    float *d_prod;
-    float *d_x, *d_y;
-
-
-    cudaMalloc((void**)&d_prod, sizeof(float));
-    cudaMalloc((void**)&d_x, n*sizeof(float));
-    cudaMalloc((void**)&d_y, n*sizeof(float));
-        
+    float* res = gpgpu_mat_correlation(h_x, signal_count, n);
     
-    cudaMemset(d_prod, 0.0, sizeof(float));
-    cudaMemcpy(d_x, h_x[0], n*sizeof(float), cudaMemcpyHostToDevice);
-    cudaMemcpy(d_y, h_x[1], n*sizeof(float), cudaMemcpyHostToDevice);
+    for(int i =0; i < signal_count; i++)
+    {
+        for(int j =0; j < signal_count; j++)
+        {
+            std::cout << res[i * signal_count + j] << "\t\t";
+        }
+        std::cout << "\n";
+    }
     
-    dot_product_kernel<<<gridSize, blockSize>>>(d_x, d_y, d_prod, n);
-    
-    cudaMemcpy(h_prod, d_prod, sizeof(float), cudaMemcpyDeviceToHost);
-    
-    std::cout << *h_prod << std::endl;
     system("pause");
 }
