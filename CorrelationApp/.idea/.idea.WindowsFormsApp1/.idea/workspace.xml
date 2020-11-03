@@ -24,7 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="b492883a-46f0-4598-8252-a4da2b8ab59d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/kernel.cu" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/kernel.cu" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/correlation.cu" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/correlation.cu" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
