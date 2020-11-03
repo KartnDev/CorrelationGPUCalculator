@@ -1,6 +1,5 @@
 #include "cuda.h"
 #include "cuda_runtime.h"
-#include <math.h>
 #include <iostream>
 
 __global__ void dot_product_kernel(float *x, float *y, float *dot, unsigned int n)
@@ -39,76 +38,79 @@ __global__ void dot_product_kernel(float *x, float *y, float *dot, unsigned int 
         i /= 2;
     }
 
-    // // calculation denominator x error sum
-    // index = threadIdx.x + blockDim.x*blockIdx.x;
-    // stride = blockDim.x*gridDim.x;
+    if(threadIdx.x == 0)
+    {
+        avg_x[0] = avg_x[0] / n;
+        avg_y[0] = avg_y[0] / n;
+	}
+
+    // calculation denominator x error sum
+    index = threadIdx.x + blockDim.x*blockIdx.x;
+    stride = blockDim.x*gridDim.x;
     
-    // __shared__ float sum_error_x[256]; 
-    // __shared__ float sum_error_y[256]; 
+    __shared__ float sum_error_x[256]; 
+    __shared__ float sum_error_y[256]; 
 
-    // temp_x = 0.0;
-    // temp_y = 0.0;
+    temp_x = 0.0;
+    temp_y = 0.0;
 
-    // while(index < n)
-    // {
-    //     temp_x += (x[index] - avg_x[0]) * (x[index] - avg_x[0]);
-    //     temp_y += (y[index] - avg_y[0]) * (y[index] - avg_y[0]);
+    while(index < n)
+    {
+        temp_x += (x[index] - avg_x[0]) * (x[index] - avg_x[0]);
+        temp_y += (y[index] - avg_y[0]) * (y[index] - avg_y[0]);
 
-	// 	index += stride;
-    // }
-    // sum_error_x[threadIdx.x] = temp_x;
-    // sum_error_y[threadIdx.x] = temp_y;
+	    index += stride;
+    }
+    sum_error_x[threadIdx.x] = temp_x;
+    sum_error_y[threadIdx.x] = temp_y;
 
-    // __syncthreads();
+    __syncthreads();
 
-    // i = blockDim.x/2;
-    // while(i != 0)
-    // {
-    //     if(threadIdx.x < i)
-    //     {
-    //         sum_error_x[threadIdx.x] += sum_error_x[threadIdx.x + i];
-    //         sum_error_y[threadIdx.x] += sum_error_y[threadIdx.x + i];
-    //     }
-    //     __syncthreads();
-    //     i /= 2;
-    // }
+    i = blockDim.x/2;
+    while(i != 0)
+    {
+        if(threadIdx.x < i)
+        {
+            sum_error_x[threadIdx.x] += sum_error_x[threadIdx.x + i];
+            sum_error_y[threadIdx.x] += sum_error_y[threadIdx.x + i];
+        }
+        __syncthreads();
+        i /= 2;
+    }
 
 
-    // // final reduction
-    // index = threadIdx.x + blockDim.x*blockIdx.x;
-	// stride = blockDim.x*gridDim.x;
+    // final reduction
+    index = threadIdx.x + blockDim.x*blockIdx.x;
+	stride = blockDim.x*gridDim.x;
     
-	// __shared__ float cache[256];
+	__shared__ float cache[256];
 
-	// double temp = 0.0;
-    // while(index < n)
-    // {
-	// 	temp += (x[index] - avg_x[0]) * (y[index] - avg_y[0]);
-	// 	index += stride;
-	// }
+	double temp = 0.0;
+    while(index < n)
+    {
+	    temp += (x[index] - avg_x[0]) * (y[index] - avg_y[0]);
+	    index += stride;
+	}
 
-	// cache[threadIdx.x] = temp;
+	cache[threadIdx.x] = temp;
 
-	// __syncthreads();
+	__syncthreads();
 
-	// // reduction
-	// i = blockDim.x/2;
-    // while(i != 0)
-    // {
-    //     if(threadIdx.x < i)
-    //     {
-	// 		cache[threadIdx.x] += cache[threadIdx.x + i];
-	// 	}
-	// 	__syncthreads();
-	// 	i /= 2;
-    // }
+	// reduction
+	i = blockDim.x/2;
+    while(i != 0)
+    {
+        if(threadIdx.x < i)
+        {
+	        cache[threadIdx.x] += cache[threadIdx.x + i];
+	    }
+	    __syncthreads();
+	    i /= 2;
+    }
     
     if(threadIdx.x == 0)
     {
-        //cache[0] /= sqrtf(sum_error_x[0] * sum_error_y[0]);
-
-
-		atomicAdd(dot, avg_x[0]);
+		atomicAdd(dot, cache[0] * sqrtf(sum_error_x[0] * sum_error_y[0]));
 	}
 }
 
