@@ -24,8 +24,18 @@
   <component name="ChangeListManager">
     <list default="true" id="b492883a-46f0-4598-8252-a4da2b8ab59d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/correlation.cu" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/correlation.cu" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/ReleaseFast/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/ReleaseFast/WindowsFormsApp1.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,12 +68,15 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/e3/105ab9b8/Application.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/03/504c0c85/Interlocked.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/f8/97873eab/ParallelOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/4b/4750dd4c/_ThreadPoolWaitCallback.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/c9/c915f323/CudafyTranslator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/11/86cad0da/RandomExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/6c/07ca3d72/Sorting.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/b7/37278464/ThreadPoolWorkQueue.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/9d/d17c31a9/Correlation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/7e/cd61956c/CompilerHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/a5/5612b8e1/Random.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/e5/c8aa911e/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/61/17546820/ArrayStatistics.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/c6/4a2082e0/GPGPU.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/b3/b89bbcda/MTAThreadAttribute.cs" root0="SKIP_HIGHLIGHTING" />
@@ -80,11 +93,11 @@
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Utils/FileWriter.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Math/Statistics/Correlations.cs" />
-        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/OpenBLASCompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/ResultWrapper.cs" />
+        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" />
       </list>
     </option>
   </component>
@@ -143,6 +156,7 @@
       <workItem from="1604227298463" duration="11962000" />
       <workItem from="1604245174581" duration="9678000" />
       <workItem from="1604393210441" duration="3023000" />
+      <workItem from="1604476552825" duration="5541000" />
     </task>
     <servers />
   </component>
@@ -179,86 +193,86 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="150" y="104" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604397520542" />
-    <state width="1877" height="227" key="GridCell.Tab.0.bottom" timestamp="1604255994143">
+    <state width="1877" height="371" key="GridCell.Tab.0.bottom" timestamp="1604481971887">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604255994143" />
-    <state width="1877" height="227" key="GridCell.Tab.0.center" timestamp="1604255994143">
+    <state width="1877" height="371" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604481971887" />
+    <state width="1877" height="371" key="GridCell.Tab.0.center" timestamp="1604481971887">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604255994143" />
-    <state width="1877" height="227" key="GridCell.Tab.0.left" timestamp="1604255994143">
+    <state width="1877" height="371" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604481971887" />
+    <state width="1877" height="371" key="GridCell.Tab.0.left" timestamp="1604481971887">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604255994143" />
-    <state width="1877" height="227" key="GridCell.Tab.0.right" timestamp="1604255994143">
+    <state width="1877" height="371" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604481971887" />
+    <state width="1877" height="371" key="GridCell.Tab.0.right" timestamp="1604481971887">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604255994143" />
-    <state width="1877" height="371" key="GridCell.Tab.1.bottom" timestamp="1604255952928">
+    <state width="1877" height="371" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604481971887" />
+    <state width="1877" height="371" key="GridCell.Tab.1.bottom" timestamp="1604481967517">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952928" />
-    <state width="1877" height="371" key="GridCell.Tab.1.center" timestamp="1604255952928">
+    <state width="1877" height="371" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604481967517" />
+    <state width="1877" height="371" key="GridCell.Tab.1.center" timestamp="1604481967517">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952928" />
-    <state width="1877" height="371" key="GridCell.Tab.1.left" timestamp="1604255952928">
+    <state width="1877" height="371" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604481967517" />
+    <state width="1877" height="371" key="GridCell.Tab.1.left" timestamp="1604481967507">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952928" />
-    <state width="1877" height="371" key="GridCell.Tab.1.right" timestamp="1604255952928">
+    <state width="1877" height="371" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604481967507" />
+    <state width="1877" height="371" key="GridCell.Tab.1.right" timestamp="1604481967517">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952928" />
-    <state width="1877" height="371" key="GridCell.Tab.2.bottom" timestamp="1604255952929">
+    <state width="1877" height="371" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604481967517" />
+    <state width="1877" height="371" key="GridCell.Tab.2.bottom" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952929" />
-    <state width="1877" height="371" key="GridCell.Tab.2.center" timestamp="1604255952929">
+    <state width="1877" height="371" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
+    <state width="1877" height="371" key="GridCell.Tab.2.center" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952929" />
-    <state width="1877" height="371" key="GridCell.Tab.2.left" timestamp="1604255952928">
+    <state width="1877" height="371" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
+    <state width="1877" height="371" key="GridCell.Tab.2.left" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952928" />
-    <state width="1877" height="371" key="GridCell.Tab.2.right" timestamp="1604255952929">
+    <state width="1877" height="371" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
+    <state width="1877" height="371" key="GridCell.Tab.2.right" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952929" />
-    <state width="1877" height="371" key="GridCell.Tab.3.bottom" timestamp="1604255952929">
+    <state width="1877" height="371" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
+    <state width="1877" height="371" key="GridCell.Tab.3.bottom" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952929" />
-    <state width="1877" height="371" key="GridCell.Tab.3.center" timestamp="1604255952929">
+    <state width="1877" height="371" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
+    <state width="1877" height="371" key="GridCell.Tab.3.center" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952929" />
-    <state width="1877" height="371" key="GridCell.Tab.3.left" timestamp="1604255952929">
+    <state width="1877" height="371" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
+    <state width="1877" height="371" key="GridCell.Tab.3.left" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952929" />
-    <state width="1877" height="371" key="GridCell.Tab.3.right" timestamp="1604255952929">
+    <state width="1877" height="371" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
+    <state width="1877" height="371" key="GridCell.Tab.3.right" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952929" />
-    <state width="1877" height="371" key="GridCell.Tab.4.bottom" timestamp="1604255952929">
+    <state width="1877" height="371" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
+    <state width="1877" height="371" key="GridCell.Tab.4.bottom" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952929" />
-    <state width="1877" height="371" key="GridCell.Tab.4.center" timestamp="1604255952929">
+    <state width="1877" height="371" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
+    <state width="1877" height="371" key="GridCell.Tab.4.center" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952929" />
-    <state width="1877" height="371" key="GridCell.Tab.4.left" timestamp="1604255952929">
+    <state width="1877" height="371" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
+    <state width="1877" height="371" key="GridCell.Tab.4.left" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952929" />
-    <state width="1877" height="371" key="GridCell.Tab.4.right" timestamp="1604255952929">
+    <state width="1877" height="371" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
+    <state width="1877" height="371" key="GridCell.Tab.4.right" timestamp="1604481935897">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="371" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604255952929" />
+    <state width="1877" height="371" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604481935897" />
     <state x="697" y="221" key="RiderGenerateDialog" timestamp="1604233421928">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -292,19 +306,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs</url>
-          <line>68</line>
-          <properties documentPath="C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\DeviceComputes\CUDACompute.cs" initialLine="68">
-            <startOffsets>
-              <option value="2491" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2558" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5DE66FF1-1FCB-4513-8463-255B392B032B/11/cf8f978c/Process.cs</url>
           <line>1772</line>
           <properties documentPath="C:\Users\Dmitry\AppData\Roaming\JetBrains\Rider2020.2\resharper-host\DecompilerCache\decompiler\5DE66FF1-1FCB-4513-8463-255B392B032B\11\cf8f978c\Process.cs" initialLine="1772">
@@ -316,6 +317,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs</url>
+          <line>78</line>
+          <properties documentPath="C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\DeviceComputes\CUDACompute.cs" initialLine="78">
+            <startOffsets>
+              <option value="2626" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2627" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

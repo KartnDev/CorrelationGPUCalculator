@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using WindowsFormsApp1.Math.Statistics;
 using Cudafy;
@@ -14,36 +16,70 @@ namespace WindowsFormsApp1.DeviceComputes
     {
         private readonly CUDA _cuda = new CUDA(true);
         private readonly GPGPU _gpu;
-        
-        public CUDACompute(string outputFolder, string prevName) : base(outputFolder, prevName)
+
+        private unsafe float** ConvertFrom2D(double[][] signals)
         {
-            CudafyModule km = CudafyModule.TryDeserialize(typeof(CUDACompute).Name);
-            if (km == null || !km.TryVerifyChecksums())
+            float*[] pointer = new float*[signals.Length];
+            for (int i = 0; i < signals.GetLength(0); i++)
             {
-                km = CudafyTranslator.Cudafy(typeof(CUDACompute));
-                km.Serialize();
+                fixed (float* singleArray = new float[signals.Length])
+                {
+                    for (int j = 0; j < signals[0].Length; j++)
+                    {
+                        singleArray[j] = (float)signals[i][j];
+                    }
+                    
+                    pointer[i] = singleArray;
+                }
             }
-            
-            _gpu = CudafyHost.GetDevice(eGPUType.Cuda);
-            _gpu.LoadModule(km);
-            
+
+            fixed (float** res = pointer)
+            {
+                return res;
+            }
         }
+        
+        
+        
+        [DllImport("kernel.dll")]
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
+        public unsafe static extern float* gpgpu_correlation_mat(float** signals, int n, int signal_count);
+
+        public double[,] MatrixCorrelation(double[][] signals)
+        {
+            double[,] result = new double[signals.GetLength(0), signals.GetLength(0)];
+            unsafe
+            {
+                var res =gpgpu_correlation_mat(ConvertFrom2D(signals), 
+                    signals.GetLength(1), 
+                    signals.GetLength(0));
+
+                for (int i = 0; i < signals.GetLength(0); i++)
+                {
+                    for (int j = 0; j < signals.GetLength(0); j++)
+                    {
+                        result[i, j] = res[i * signals.GetLength(0) + j];
+                    }
+                }
+            }
+
+            return result;
+        }
+        
         private readonly List<double[,]> _resultShiftsList = new List<double[,]>();
         public void ShiftCompute(List<double[]> fullSignals, int shiftWidth, int batchSize)
         {
-            Parallel.For(0, fullSignals.First().Length, 
-                new ParallelOptions(){MaxDegreeOfParallelism = MaxParallelDegree},
-                index =>
-                {
+            for(int i = 0; i < fullSignals.First().Length; i+= shiftWidth)
+            {
                     var currentShift = new List<double[]>();
 
                     foreach (var signalFull in fullSignals)
                     {
-                        currentShift.Add(signalFull.Skip(index).ToArray());                    
+                        currentShift.Add(signalFull.Skip(i).ToArray());                    
                     }
 
                     SplitByBatches(currentShift, 1000);
-                });
+            }
             
             WriteMatrixesToFile(_resultShiftsList, batchSize, shiftWidth);
         }
@@ -66,41 +102,16 @@ namespace WindowsFormsApp1.DeviceComputes
 
         private void CalculateBatchCorrelationMatrix(List<double[]> batch)
         {
-            double[,] correlationMatrix = new double[batch.Count, batch.Count];
-
-            for (int i = 0; i < batch.Count; i++)
-            {
-                for (int j = 0; j < batch.Count; j++)
-                {
-                    var rankX = RankFinder.Rank(batch[i]);
-                    var rankY = RankFinder.Rank(batch[j]);
-                    
-                    double[] deviceRankX = _gpu.CopyToDevice(rankX);
-                    double[] deviceRankY = _gpu.CopyToDevice(rankY);
-
-                    double result = 0.0;
-
-                    _gpu.Launch(rankX.Length, 1)
-                        .ComputeSpearmanrCorrelationGpu(deviceRankX, deviceRankY, ref result, rankX.Length);
-                    correlationMatrix[i, j] = System.Math.Round(result , RoundValue);
-                }
-            }
-            _resultShiftsList.Add(correlationMatrix);
+            _resultShiftsList.Add(MatrixCorrelation( batch.ToArray()));
         }
         
-        [Cudafy]
-        private static void ComputeSpearmanrCorrelationGpu(GThread thread, double[] a, double[] b, ref double c, int n)
-        {
-            int tid = thread.blockIdx.x;
-
-            if (tid < a.Length)
-                c += (a[tid] - b[tid]) * (a[tid] - b[tid]);
-
-            c = 1 - 1.0 - (6.0 * c) / (n * n * n - n);
-        }
 
 
         public int MaxParallelDegree { get; set; } = 24;
-        public int RoundValue { get; set; }
+        public int RoundValue { get; set; } = 2;
+
+        public CUDACompute(string outputFolder, string prevName) : base(outputFolder, prevName)
+        {
+        }
     }
 }
