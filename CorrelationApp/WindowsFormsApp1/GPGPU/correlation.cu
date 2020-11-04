@@ -7,9 +7,13 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-
-
 extern "C" {
+float* gpgpu_correlation_mat(float** signals, int n, int signal_count);
+void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize);
+void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, int batchSize);
+
+
+
     __global__ void correlation(float *x, float *y, float *num, float *denom, unsigned int n, float avg_x, float avg_y)
     {
         unsigned int index = threadIdx.x + blockDim.x*blockIdx.x;
@@ -72,66 +76,29 @@ extern "C" {
         return sum / n;
     }
 
-    void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, int batchSize)
+
+
+    void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize)
     {
-        // allocationg
-        float** shift = (float**)malloc(signal_count*sizeof(float*));
-        for(int k = 0; k < signal_count; k++)
-        {
-            shift[k] = (float*)malloc((n - i) * sizeof(float));
-        }
-
-        float** batchAlloc = (float**)malloc(signalCount*sizeof(float*));
+        float** batch = (float**)malloc(signalCount*sizeof(float*));
         for(int k = 0; k < signalCount; k++)
         {
-            batchAlloc[k] = (float*)malloc(batchSize * sizeof(float));
+            batch[k] = (float*)malloc(batchSize * sizeof(float));
         }
-
-        //computing
-        for(int i = 0; i < n; i += shiftWidth)
-        {
-            for(int k = 0; k < signal_count; k++)
-            {
-                for(int j = 0; j < n - i; j++)
-                {
-                    shift[k][j] = fullSignals[k][j + i];
-                }
-            }
-            splitByBatches(shift, n, signalCount, shiftWidth, batchSize, batchAlloc); 
-        }
-
-        //freeing
-        for(int k = 0; k < signalCount; k++)
-        {
-            free(batchAlloc[k]);
-        }
-        free(batchAlloc);
-
-        for(int k = 0; k < signalCount; k++)
-        {
-            free(shift[k]);
-        }
-        free(shift);
-    }
-
-    void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, float** batchAlloc)
-    {
-        int batchEpochs = n % batchSize;
         
-        float batch** = batchAlloc;
 
-        //computing
-        for (int batchIndex = 0; batchIndex < n; batchIndex += batchSize)
+        for (int batchIndex = 0; batchIndex < n - batchSize; batchIndex += batchSize)
         {
+            printf("Batch %i\n", batchIndex);
             for(int k = 0; k < signalCount; k++)
             {
                 for(int j = 0; j < batchSize; j++)
                 {
-                    batch[k][j] = fullSignals[k][j + batchIndex];
+                    batch[k][j] = currentShiftSignals[k][j + batchIndex];
                 }
             }
 
-            float * result = gpgpu_correlation_mat(batch, n, signalCount);
+            float * result = gpgpu_correlation_mat(batch, batchSize, signalCount);
 
             for(int i = 0; i < signalCount; i++)
             {
@@ -141,7 +108,14 @@ extern "C" {
                 }
                 std::cout << "\n";
             }
+           
         }
+        //freeing
+        for(int k = 0; k < signalCount; k++)
+        {
+            free(batch[k]);
+        }
+        free(batch);
     }
 
 
@@ -237,16 +211,8 @@ int main(int argc, char** argv)
         }
     }
 
-    float * result = gpgpu_correlation_mat(h_x, n, signal_count);
 
-    for(int i = 0; i < signal_count; i++)
-    {
-        for(int j = 0; j < signal_count; j++)
-        {   
-            printf("%.2f\t|\t", result[i * signal_count + j]);
-        }
-        std::cout << "\n";
-    }
+    SplitByBatches(h_x, n, signal_count, 100, 100);
 
 
     system("pause");
