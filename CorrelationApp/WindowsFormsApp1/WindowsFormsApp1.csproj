@@ -78,6 +78,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Math\Statistics\ArrayExtensions.cs" />
     <Compile Include="Math\Statistics\Correlations.cs" />
     <Compile Include="Math\Statistics\RankFinder.cs" />
     <Compile Include="Program.cs" />

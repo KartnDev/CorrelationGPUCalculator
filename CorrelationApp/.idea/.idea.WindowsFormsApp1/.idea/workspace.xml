@@ -25,16 +25,9 @@
     <list default="true" id="b492883a-46f0-4598-8252-a4da2b8ab59d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/OpenBLASCompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/OpenBLASCompute.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/ResultWrapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/ResultWrapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/correlation.cu" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/correlation.cu" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,10 +86,11 @@
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Math/Statistics/Correlations.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" />
-        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/OpenBLASCompute.cs" />
-        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/ResultWrapper.cs" />
+        <option value="$PROJECT_DIR$/WindowsFormsApp1/Math/Statistics/ArrayExtensions.cs" />
+        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" />
+        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/OpenBLASCompute.cs" />
       </list>
     </option>
   </component>
@@ -156,7 +150,7 @@
       <workItem from="1604245174581" duration="9678000" />
       <workItem from="1604393210441" duration="3023000" />
       <workItem from="1604476552825" duration="5541000" />
-      <workItem from="1604484352579" duration="6072000" />
+      <workItem from="1604484352579" duration="7033000" />
     </task>
     <servers />
   </component>
@@ -193,22 +187,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="150" y="104" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604397520542" />
-    <state width="1877" height="227" key="GridCell.Tab.0.bottom" timestamp="1604497064451">
+    <state width="1877" height="227" key="GridCell.Tab.0.bottom" timestamp="1604497288850">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604497064451" />
-    <state width="1877" height="227" key="GridCell.Tab.0.center" timestamp="1604497064451">
+    <state width="1877" height="227" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604497288850" />
+    <state width="1877" height="227" key="GridCell.Tab.0.center" timestamp="1604497288850">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604497064451" />
-    <state width="1877" height="227" key="GridCell.Tab.0.left" timestamp="1604497064451">
+    <state width="1877" height="227" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604497288850" />
+    <state width="1877" height="227" key="GridCell.Tab.0.left" timestamp="1604497288850">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604497064451" />
-    <state width="1877" height="227" key="GridCell.Tab.0.right" timestamp="1604497064451">
+    <state width="1877" height="227" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604497288850" />
+    <state width="1877" height="227" key="GridCell.Tab.0.right" timestamp="1604497288850">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604497064451" />
+    <state width="1877" height="227" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604497288850" />
     <state width="1877" height="371" key="GridCell.Tab.1.bottom" timestamp="1604496919233">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -317,19 +311,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs</url>
-          <line>23</line>
-          <properties documentPath="C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\DeviceComputes\CUDACompute.cs" initialLine="23">
-            <startOffsets>
-              <option value="768" />
-            </startOffsets>
-            <endOffsets>
-              <option value="830" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

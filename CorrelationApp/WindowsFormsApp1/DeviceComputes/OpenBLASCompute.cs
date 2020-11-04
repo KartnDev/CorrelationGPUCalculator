@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using WindowsFormsApp1.Math.Statistics;
 using MathNet;
 
 namespace WindowsFormsApp1.DeviceComputes
@@ -23,14 +24,10 @@ namespace WindowsFormsApp1.DeviceComputes
                 new ParallelOptions(){MaxDegreeOfParallelism = MaxParallelDegree},
                 index =>
                 {
-                    var currentShift = new List<double[]>();
-
-                    foreach (var signalFull in fullSignals)
+                    for (int i = 0; i < fullSignals.Count; i++)
                     {
-                        currentShift.Add(signalFull.Skip(index).ToArray());                    
+                        fullSignals[i] = ArrayExtensions.RightShift(fullSignals[i], shiftWidth);
                     }
-
-                    SplitByBatches(currentShift, 1000);
                 });
             
             WriteMatrixesToFile(_resultShiftsList.ToList(), batchSize, shiftWidth);

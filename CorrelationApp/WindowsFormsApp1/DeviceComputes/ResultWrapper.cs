@@ -11,20 +11,6 @@ namespace WindowsFormsApp1.DeviceComputes
         private readonly string _outputFolder;
         protected readonly string prevName;
         protected readonly string pathNamePath;
-
-        protected double[] ShiftRight(double[] arr) 
-        {
-            double[] demo = new double[arr.Length];
-
-            for (int i = 1; i < arr.Length; i++) 
-            {
-                demo[i] = arr[i - 1];
-            }
-
-            demo[0] = arr[demo.Length - 1];
-
-            return demo;
-        }
         
         public ResultWrapper(string outputFolder, string filePath)
         {

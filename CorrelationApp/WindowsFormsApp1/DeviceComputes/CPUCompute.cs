@@ -23,14 +23,11 @@ namespace WindowsFormsApp1.DeviceComputes
                 new ParallelOptions(){MaxDegreeOfParallelism = MaxParallelDegree},
                 index =>
             {
-                var currentShift = new List<double[]>();
-
-                foreach (var signalFull in fullSignals)
+                for (int i = 0; i < fullSignals.Count; i++)
                 {
-                    currentShift.Add(signalFull.Skip(index).ToArray());                    
+                    fullSignals[i] = ArrayExtensions.RightShift(fullSignals[i], shiftWidth);
                 }
-
-                SplitByBatches(currentShift, 1000);
+                SplitByBatches(fullSignals, batchSize);
             });
             
            WriteMatrixesToFile(_resultShiftsList, batchSize, shiftWidth);
