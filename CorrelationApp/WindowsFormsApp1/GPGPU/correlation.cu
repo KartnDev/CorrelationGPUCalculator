@@ -72,6 +72,79 @@ extern "C" {
         return sum / n;
     }
 
+    void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, int batchSize)
+    {
+        // allocationg
+        float** shift = (float**)malloc(signal_count*sizeof(float*));
+        for(int k = 0; k < signal_count; k++)
+        {
+            shift[k] = (float*)malloc((n - i) * sizeof(float));
+        }
+
+        float** batchAlloc = (float**)malloc(signalCount*sizeof(float*));
+        for(int k = 0; k < signalCount; k++)
+        {
+            batchAlloc[k] = (float*)malloc(batchSize * sizeof(float));
+        }
+
+        //computing
+        for(int i = 0; i < n; i += shiftWidth)
+        {
+            for(int k = 0; k < signal_count; k++)
+            {
+                for(int j = 0; j < n - i; j++)
+                {
+                    shift[k][j] = fullSignals[k][j + i];
+                }
+            }
+            splitByBatches(shift, n, signalCount, shiftWidth, batchSize, batchAlloc); 
+        }
+
+        //freeing
+        for(int k = 0; k < signalCount; k++)
+        {
+            free(batchAlloc[k]);
+        }
+        free(batchAlloc);
+
+        for(int k = 0; k < signalCount; k++)
+        {
+            free(shift[k]);
+        }
+        free(shift);
+    }
+
+    void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, float** batchAlloc)
+    {
+        int batchEpochs = n % batchSize;
+        
+        float batch** = batchAlloc;
+
+        //computing
+        for (int batchIndex = 0; batchIndex < n; batchIndex += batchSize)
+        {
+            for(int k = 0; k < signalCount; k++)
+            {
+                for(int j = 0; j < batchSize; j++)
+                {
+                    batch[k][j] = fullSignals[k][j + batchIndex];
+                }
+            }
+
+            float * result = gpgpu_correlation_mat(batch, n, signalCount);
+
+            for(int i = 0; i < signalCount; i++)
+            {
+                for(int j = 0; j < signalCount; j++)
+                {   
+                    printf("%.2f\t|\t", result[i * signalCount + j]);
+                }
+                std::cout << "\n";
+            }
+        }
+    }
+
+
     float* gpgpu_correlation_mat(float** signals, int n, int signal_count)
     {
         dim3 gridSize = 256;
@@ -112,6 +185,14 @@ extern "C" {
                 result[i * signal_count + j] = (*num_res) / (*denom_res);
             }
         }
+
+        cudaFree(d_prod_num);
+        cudaFree(d_prod_denom);
+        cudaFree(d_x);
+        cudaFree(d_y);
+
+        free(denom_res);
+        free(num_res);
 
         return result;
     }

@@ -50,7 +50,7 @@ namespace WindowsFormsApp1.DeviceComputes
             double[,] result = new double[signals.GetLength(0), signals.GetLength(0)];
             unsafe
             {
-                var res =gpgpu_correlation_mat(ConvertFrom2D(signals), 
+                var res = gpgpu_correlation_mat(ConvertFrom2D(signals), 
                     signals.GetLength(1), 
                     signals.GetLength(0));
 
