@@ -20,6 +20,7 @@
         <e p="Form1.resx" t="Include" />
         <e p="Math" t="Include">
           <e p="Statistics" t="Include">
+            <e p="ArrayExtensions.cs" t="Include" />
             <e p="Correlations.cs" t="Include" />
             <e p="RankFinder.cs" t="Include" />
           </e>

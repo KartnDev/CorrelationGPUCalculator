@@ -8,15 +8,15 @@ namespace WindowsFormsApp1.DeviceComputes
 {
     public abstract class ResultWrapper
     {
-        private readonly string _outputFolder;
+        protected readonly string outputFolder;
         protected readonly string prevName;
         protected readonly string pathNamePath;
         
         public ResultWrapper(string outputFolder, string filePath)
         {
-            _outputFolder = outputFolder;
+            this.outputFolder = outputFolder;
             
-            this.pathNamePath = filePath;
+            pathNamePath = filePath;
             prevName = filePath.Split("\\".ToCharArray()).Last();
 
             if (!Directory.Exists(outputFolder))
@@ -27,7 +27,7 @@ namespace WindowsFormsApp1.DeviceComputes
 
         public async void WriteMatrixesToFile(List<double[,]> matrixes, int batchSize, int shiftStep)
         {
-            string filename = $"{_outputFolder}//{shiftStep}_{batchSize}_{prevName}";
+            string filename = $"{outputFolder}//{shiftStep}_{batchSize}_{prevName}";
 
             if (File.Exists(filename))
             {

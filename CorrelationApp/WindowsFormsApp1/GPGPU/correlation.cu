@@ -17,7 +17,7 @@
 float* gpgpu_correlation_mat(float** signals, int n, int signal_count);
 void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize);
 void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, int batchSize);
-void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss);
+void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss, std::string outputPath);
 
     __global__ void correlation(float *x, float *y, float *num, float *denom, unsigned int n, float avg_x, float avg_y)
     {
@@ -130,21 +130,7 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
         std::rotate(a, a + size - shift, a + size);
     }
 
-    std::string GetExeFileName()
-    {
-      char buffer[MAX_PATH];
-      GetModuleFileName( NULL, buffer, MAX_PATH );
-      return std::string(buffer);
-    }
-    
-    std::string GetExePath() 
-    {
-      std::string f = GetExeFileName();
-      return f.substr(0, f.find_last_of( "\\/" ));
-    }
-   
-
-    void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::string prev_filename)
+    void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::string prev_filename, std::string outputPath)
     {
         std::stringstream ss;
         for(int i = 0; i < n; i+= shiftWidth)
@@ -159,11 +145,11 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
             SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, ss);
         }
         
-        write_file(shiftWidth, batchSize, prev_filename, ss);
+        write_file(shiftWidth, batchSize, prev_filename, ss, outputPath);
         
     }
 
-    void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss)
+    void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss, std::string outputPath)
     {
         auto start = std::chrono::system_clock::now();
         // Some computation here
@@ -178,7 +164,7 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
         std::replace( date.begin(), date.end(), '\n', '_');
         std::replace( date.begin(), date.end(), '\t', '_');
 
-        std::string filename = GetExePath() + "\\" + std::to_string(shiftWidth) + "_" + std::to_string(batchSize ) + "_"  + date + prev_filename;
+        std::string filename = outputPath + "\\" + std::to_string(shiftWidth) + "_" + std::to_string(batchSize ) + "_"  + date + prev_filename;
         std::ofstream outFile(filename);
         std::cout << filename << std::endl;
         outFile << ss.rdbuf();
@@ -245,22 +231,18 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
 
 int main(int argc, char** argv)
 {
-    if(argc != 5)
+    if(argc != 6)
     {
         std::cerr << "Bad parameters..." << std::endl;
         for(int i = 0; i < argc; i++)
         {
             std::cout << argv[i] << std::endl;
         }
-        
-
         system("pause");
         return -1;
     }
 
-    system("pause");
     std::ifstream f;
-    system("pause");
     f.open(argv[1]);
 
     if(!f.good())
@@ -269,7 +251,6 @@ int main(int argc, char** argv)
         system("pause");
         return -2;
     }
-    system("pause");
     
 
     std::string line, val;                  
@@ -285,7 +266,7 @@ int main(int argc, char** argv)
         }     
         array.push_back (v);                
     }
-    system("pause");
+
     unsigned int n = array.size();
     int signal_count = array[0].size();
     
@@ -306,7 +287,7 @@ int main(int argc, char** argv)
     }
 
     std::cout << "Start Computing..." << std::endl;
-    ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]),std::stoi(argv[3]), argv[4]);
+    ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]),std::stoi(argv[3]), argv[4], argv[5]);
     std::cout << "End Computing" << std::endl;
     for(int i = 0; i < signal_count; i++)
     {

@@ -19,7 +19,7 @@ namespace WindowsFormsApp1.DeviceComputes
         public void ShiftCompute(List<double[]> fullSignals, int shiftWidth, int batchSize)
         {
             string filename = @"C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\GPGPU\a.exe";
-            string @params = $"{pathNamePath} {shiftWidth} {batchSize} {prevName}";
+            string @params = $"{pathNamePath} {shiftWidth} {batchSize} {prevName} {outputFolder}";
 
             var proc = System.Diagnostics.Process.Start(filename,@params);
         }

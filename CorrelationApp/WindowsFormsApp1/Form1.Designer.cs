@@ -37,6 +37,7 @@
             this.batchSizeLabel = new System.Windows.Forms.Label();
             this.BatchSizeBox = new System.Windows.Forms.TextBox();
             this.DeviceListBox = new System.Windows.Forms.TextBox();
+            this.PickOutputFolder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize) (this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -126,11 +127,22 @@
             this.DeviceListBox.Size = new System.Drawing.Size(195, 109);
             this.DeviceListBox.TabIndex = 8;
             // 
+            // PickOutputFolder
+            // 
+            this.PickOutputFolder.Location = new System.Drawing.Point(12, 401);
+            this.PickOutputFolder.Name = "PickOutputFolder";
+            this.PickOutputFolder.Size = new System.Drawing.Size(111, 37);
+            this.PickOutputFolder.TabIndex = 9;
+            this.PickOutputFolder.Text = "Output Folder\r\n";
+            this.PickOutputFolder.UseVisualStyleBackColor = true;
+            this.PickOutputFolder.Click += new System.EventHandler(this.PickOutputFolderClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.PickOutputFolder);
             this.Controls.Add(this.DeviceListBox);
             this.Controls.Add(this.BatchSizeBox);
             this.Controls.Add(this.batchSizeLabel);
@@ -146,6 +158,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button PickOutputFolder;
 
         private System.Windows.Forms.TextBox DeviceListBox;
 
