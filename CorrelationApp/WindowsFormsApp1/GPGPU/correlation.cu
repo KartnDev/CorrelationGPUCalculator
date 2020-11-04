@@ -13,6 +13,7 @@
 #include <windows.h>
 #include <algorithm>
 
+
 float* gpgpu_correlation_mat(float** signals, int n, int signal_count);
 void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize);
 void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, int batchSize);
@@ -159,6 +160,7 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
             SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, ss);
         }
         
+
         auto start = std::chrono::system_clock::now();
         // Some computation here
         auto end = std::chrono::system_clock::now();
@@ -172,7 +174,7 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
         std::replace( date.begin(), date.end(), '\n', '_');
         std::replace( date.begin(), date.end(), '\t', '_');
 
-        std::string filename = GetExePath() + "\\OutputValues\\" + std::to_string(shiftWidth) + "_" + std::to_string(batchSize ) + "_"  + date + prev_filename ;
+        std::string filename = GetExePath() + "\\" + std::to_string(shiftWidth) + "_" + std::to_string(batchSize ) + "_"  + date + prev_filename ;
         std::ofstream outFile(filename);
         std::cout << filename << std::endl;
         outFile << ss.rdbuf();
@@ -274,7 +276,7 @@ int main(int argc, char** argv)
     }
 
 
-    ShiftCompute(h_x, n, signal_count, 10, 50, "ClosedEyes.asc");
+    ShiftCompute(h_x, n, signal_count, 100, 500, "ClosedEyes.asc");
 
 
     system("pause");
