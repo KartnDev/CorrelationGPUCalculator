@@ -7,6 +7,8 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <cassert>
+
 extern "C" {
 float* gpgpu_correlation_mat(float** signals, int n, int signal_count);
 void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize);
@@ -118,6 +120,29 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
         free(batch);
     }
 
+    void circularShift(float* a, int size, int shift)
+    {
+        assert(size >= shift);
+        std::rotate(a, a + size - shift, a + size);
+    }
+
+
+    void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize)
+    {
+        for(int i = 0; i < n; i+= shiftWidth)
+        {
+            printf("Shift: %i\n", i);
+            for(int k = 0; k < signalCount; k++)
+            {
+                circularShift(currentShiftSignals[k], n, shiftWidth);
+            }
+            
+
+            SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize);
+        }
+    }
+
+
 
     float* gpgpu_correlation_mat(float** signals, int n, int signal_count)
     {
@@ -212,7 +237,7 @@ int main(int argc, char** argv)
     }
 
 
-    SplitByBatches(h_x, n, signal_count, 100, 100);
+    ShiftCompute(h_x, n, signal_count, 10, 50);
 
 
     system("pause");
