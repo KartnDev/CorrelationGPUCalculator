@@ -8,8 +8,11 @@
 #include <sstream>
 #include <vector>
 #include <cassert>
+#include <chrono>
+#include <ctime> 
+#include <windows.h>
+#include <algorithm>
 
-extern "C" {
 float* gpgpu_correlation_mat(float** signals, int n, int signal_count);
 void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize);
 void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, int batchSize);
@@ -80,8 +83,9 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
 
 
 
-    void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize)
+    void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::stringstream& ss)
     {
+
         float** batch = (float**)malloc(signalCount*sizeof(float*));
         for(int k = 0; k < signalCount; k++)
         {
@@ -91,7 +95,7 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
 
         for (int batchIndex = 0; batchIndex < n - batchSize; batchIndex += batchSize)
         {
-            printf("Batch %i\n", batchIndex);
+            ss << "Batch " << batchIndex << std::endl;
             for(int k = 0; k < signalCount; k++)
             {
                 for(int j = 0; j < batchSize; j++)
@@ -106,9 +110,9 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
             {
                 for(int j = 0; j < signalCount; j++)
                 {   
-                    printf("%.2f\t|\t", result[i * signalCount + j]);
+                   ss << " " << result[i * signalCount + j];
                 }
-                std::cout << "\n";
+                ss << "\n";
             }
            
         }
@@ -126,23 +130,56 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
         std::rotate(a, a + size - shift, a + size);
     }
 
-
-    void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize)
+    std::string GetExeFileName()
     {
+      char buffer[MAX_PATH];
+      GetModuleFileName( NULL, buffer, MAX_PATH );
+      return std::string(buffer);
+    }
+    
+    std::string GetExePath() 
+    {
+      std::string f = GetExeFileName();
+      return f.substr(0, f.find_last_of( "\\/" ));
+    }
+   
+
+    void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::string prev_filename)
+    {
+        std::stringstream ss;
         for(int i = 0; i < n; i+= shiftWidth)
         {
-            printf("Shift: %i\n", i);
+            ss << "Shift:" << i << "\n";
             for(int k = 0; k < signalCount; k++)
             {
                 circularShift(currentShiftSignals[k], n, shiftWidth);
             }
             
 
-            SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize);
+            SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, ss);
         }
+        
+        auto start = std::chrono::system_clock::now();
+        // Some computation here
+        auto end = std::chrono::system_clock::now();
+    
+        std::chrono::duration<double> elapsed_seconds = end-start;
+        std::time_t end_time = std::chrono::system_clock::to_time_t(end);
+    
+        std::string date = std::ctime(&end_time);
+        remove_if(date.begin(), date.end(), isspace);
+        std::replace( date.begin(), date.end(), ':', '_');
+        std::replace( date.begin(), date.end(), '\n', '_');
+        std::replace( date.begin(), date.end(), '\t', '_');
+
+        std::string filename = GetExePath() + "\\OutputValues\\" + std::to_string(shiftWidth) + "_" + std::to_string(batchSize ) + "_"  + date + prev_filename ;
+        std::ofstream outFile(filename);
+        std::cout << filename << std::endl;
+        outFile << ss.rdbuf();
+        outFile.close();
     }
 
-
+  
 
     float* gpgpu_correlation_mat(float** signals, int n, int signal_count)
     {
@@ -195,7 +232,7 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
 
         return result;
     }
-}
+
 
 
 
@@ -237,7 +274,7 @@ int main(int argc, char** argv)
     }
 
 
-    ShiftCompute(h_x, n, signal_count, 10, 50);
+    ShiftCompute(h_x, n, signal_count, 10, 50, "ClosedEyes.asc");
 
 
     system("pause");
