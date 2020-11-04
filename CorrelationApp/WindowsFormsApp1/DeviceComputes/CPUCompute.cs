@@ -12,7 +12,7 @@ namespace WindowsFormsApp1.DeviceComputes
         
         private readonly List<double[,]> _resultShiftsList = new List<double[,]>();
         
-        public CpuComputeDevice(string outputFolder, string prevName) : base(outputFolder, prevName)
+        public CpuComputeDevice(string outputFolder, string filePath) : base(outputFolder, filePath)
         {
             
         }

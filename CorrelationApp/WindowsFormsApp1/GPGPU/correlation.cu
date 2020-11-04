@@ -17,8 +17,7 @@
 float* gpgpu_correlation_mat(float** signals, int n, int signal_count);
 void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize);
 void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, int batchSize);
-
-
+void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss);
 
     __global__ void correlation(float *x, float *y, float *num, float *denom, unsigned int n, float avg_x, float avg_y)
     {
@@ -115,7 +114,7 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
                 }
                 ss << "\n";
             }
-           
+            free(result);
         }
         //freeing
         for(int k = 0; k < signalCount; k++)
@@ -160,7 +159,12 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
             SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, ss);
         }
         
+        write_file(shiftWidth, batchSize, prev_filename, ss);
+        
+    }
 
+    void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss)
+    {
         auto start = std::chrono::system_clock::now();
         // Some computation here
         auto end = std::chrono::system_clock::now();
@@ -174,14 +178,14 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
         std::replace( date.begin(), date.end(), '\n', '_');
         std::replace( date.begin(), date.end(), '\t', '_');
 
-        std::string filename = GetExePath() + "\\" + std::to_string(shiftWidth) + "_" + std::to_string(batchSize ) + "_"  + date + prev_filename ;
+        std::string filename = GetExePath() + "\\" + std::to_string(shiftWidth) + "_" + std::to_string(batchSize ) + "_"  + date + prev_filename;
         std::ofstream outFile(filename);
         std::cout << filename << std::endl;
         outFile << ss.rdbuf();
         outFile.close();
     }
 
-  
+
 
     float* gpgpu_correlation_mat(float** signals, int n, int signal_count)
     {
@@ -241,21 +245,47 @@ void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, 
 
 int main(int argc, char** argv)
 {
+    if(argc != 5)
+    {
+        std::cerr << "Bad parameters..." << std::endl;
+        for(int i = 0; i < argc; i++)
+        {
+            std::cout << argv[i] << std::endl;
+        }
+        
+
+        system("pause");
+        return -1;
+    }
+
+    system("pause");
     std::ifstream f;
-       
-    f.open ("ClosedEyes.asc");
+    system("pause");
+    f.open(argv[1]);
+
+    if(!f.good())
+    {
+        std::cerr << "Bad filepath input (bad file)..." << std::endl;
+        system("pause");
+        return -2;
+    }
+    system("pause");
+    
 
     std::string line, val;                  
     std::vector<std::vector<float>> array;    
 
-    while (std::getline (f, line)) {      
-    std::vector<float> v;                 
-    std::stringstream s (line);         
-    while (getline (s, val, ' '))       
-        v.push_back (std::stof (val));  
-    array.push_back (v);                
+    while (std::getline (f, line)) 
+    {      
+        std::vector<float> v;                 
+        std::stringstream s (line);         
+        while (getline (s, val, ' '))  
+        {
+            v.push_back (std::stof (val));  
+        }     
+        array.push_back (v);                
     }
-
+    system("pause");
     unsigned int n = array.size();
     int signal_count = array[0].size();
     
@@ -275,10 +305,12 @@ int main(int argc, char** argv)
         }
     }
 
-
-    ShiftCompute(h_x, n, signal_count, 100, 500, "ClosedEyes.asc");
-
-
-    system("pause");
-
+    std::cout << "Start Computing..." << std::endl;
+    ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]),std::stoi(argv[3]), argv[4]);
+    std::cout << "End Computing" << std::endl;
+    for(int i = 0; i < signal_count; i++)
+    {
+        free(h_x[i]); 
+    }
+    free(h_x);
 }

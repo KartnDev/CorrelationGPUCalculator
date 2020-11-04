@@ -13,7 +13,7 @@ namespace WindowsFormsApp1.DeviceComputes
         public int RoundValue { get; set; } = 2;
         
         private readonly ConcurrentBag<double[,]> _resultShiftsList = new ConcurrentBag<double[,]>(); // TODO Is dense need ?
-        public OpenBLASCompute(string outputFolder, string prevName) : base(outputFolder, prevName)
+        public OpenBLASCompute(string outputFolder, string filePath) : base(outputFolder, filePath)
         {
         }
         

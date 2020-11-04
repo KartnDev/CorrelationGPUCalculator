@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,7 +9,8 @@ namespace WindowsFormsApp1.DeviceComputes
     public abstract class ResultWrapper
     {
         private readonly string _outputFolder;
-        private readonly string _prevName;
+        protected readonly string prevName;
+        protected readonly string pathNamePath;
 
         protected double[] ShiftRight(double[] arr) 
         {
@@ -24,10 +26,12 @@ namespace WindowsFormsApp1.DeviceComputes
             return demo;
         }
         
-        public ResultWrapper(string outputFolder, string prevName)
+        public ResultWrapper(string outputFolder, string filePath)
         {
-            this._outputFolder = outputFolder;
-            _prevName = prevName;
+            _outputFolder = outputFolder;
+            
+            this.pathNamePath = filePath;
+            prevName = filePath.Split("\\".ToCharArray()).Last();
 
             if (!Directory.Exists(outputFolder))
             {
@@ -37,7 +41,7 @@ namespace WindowsFormsApp1.DeviceComputes
 
         public async void WriteMatrixesToFile(List<double[,]> matrixes, int batchSize, int shiftStep)
         {
-            string filename = $"{_outputFolder}//{shiftStep}_{batchSize}_{_prevName}";
+            string filename = $"{_outputFolder}//{shiftStep}_{batchSize}_{prevName}";
 
             if (File.Exists(filename))
             {
