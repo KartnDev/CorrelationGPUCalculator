@@ -133,7 +133,7 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
         std::stringstream ss;
         for(int i = 0; i < actives.size(); i++)
         {
-            ss << "Active"  << actives[i] << "\t\t";
+            ss << "Active"  << actives[i] << "\t\t\t";
         }
         ss << std::endl;
         for(int i = 0; i < n; i+= shiftWidth)
