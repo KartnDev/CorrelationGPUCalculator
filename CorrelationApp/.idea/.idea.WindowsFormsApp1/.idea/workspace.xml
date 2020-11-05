@@ -23,22 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b492883a-46f0-4598-8252-a4da2b8ab59d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/OpenBLASCompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/OpenBLASCompute.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.resx" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.resx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/correlation.cu" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/correlation.cu" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.GenerateResource.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.csproj.GenerateResource.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" afterDir="false" />
     </list>
@@ -69,6 +60,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/77/c0e8e278/Number.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/d0/2b796fd4/ButtonBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/f2/1a25e480/ExecutionContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5DE66FF1-1FCB-4513-8463-255B392B032B/84/fca9c706/Queue`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/60/10ccb856/ePlatform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/45/6585cb0e/Control.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/eb/87e3ce97/Task.cs" root0="FORCE_HIGHLIGHTING" />
@@ -177,7 +169,7 @@
       <workItem from="1604484352579" duration="7054000" />
       <workItem from="1604498415920" duration="6932000" />
       <workItem from="1604520452897" duration="159000" />
-      <workItem from="1604563293993" duration="11263000" />
+      <workItem from="1604563293993" duration="14774000" />
     </task>
     <servers />
   </component>
@@ -214,22 +206,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="150" y="104" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604397520542" />
-    <state width="1877" height="227" key="GridCell.Tab.0.bottom" timestamp="1604576373799">
+    <state width="1860" height="224" key="GridCell.Tab.0.bottom" timestamp="1604581610405">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604576373799" />
-    <state width="1877" height="227" key="GridCell.Tab.0.center" timestamp="1604576373798">
+    <state width="1860" height="224" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604581610405" />
+    <state width="1860" height="224" key="GridCell.Tab.0.center" timestamp="1604581610405">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604576373798" />
-    <state width="1877" height="227" key="GridCell.Tab.0.left" timestamp="1604576373798">
+    <state width="1860" height="224" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604581610405" />
+    <state width="1860" height="224" key="GridCell.Tab.0.left" timestamp="1604581610405">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604576373798" />
-    <state width="1877" height="227" key="GridCell.Tab.0.right" timestamp="1604576373799">
+    <state width="1860" height="224" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604581610405" />
+    <state width="1860" height="224" key="GridCell.Tab.0.right" timestamp="1604581610405">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="227" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604576373799" />
+    <state width="1860" height="224" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604581610405" />
     <state width="1877" height="371" key="GridCell.Tab.1.bottom" timestamp="1604572384817">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

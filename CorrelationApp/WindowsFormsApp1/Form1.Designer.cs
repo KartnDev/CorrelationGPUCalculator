@@ -40,6 +40,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.MainSignal = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.AtiveSignals = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.buttonLoadDir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize) (this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,7 +56,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(13, 56);
+            this.button2.Location = new System.Drawing.Point(13, 97);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(110, 39);
             this.button2.TabIndex = 2;
@@ -76,7 +77,7 @@
             // 
             // shiftBox
             // 
-            this.shiftBox.Location = new System.Drawing.Point(12, 128);
+            this.shiftBox.Location = new System.Drawing.Point(12, 169);
             this.shiftBox.Name = "shiftBox";
             this.shiftBox.Size = new System.Drawing.Size(111, 20);
             this.shiftBox.TabIndex = 4;
@@ -85,7 +86,7 @@
             // shiftLabel
             // 
             this.shiftLabel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.shiftLabel.Location = new System.Drawing.Point(13, 102);
+            this.shiftLabel.Location = new System.Drawing.Point(13, 143);
             this.shiftLabel.Name = "shiftLabel";
             this.shiftLabel.Size = new System.Drawing.Size(90, 23);
             this.shiftLabel.TabIndex = 5;
@@ -94,7 +95,7 @@
             // batchSizeLabel
             // 
             this.batchSizeLabel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.batchSizeLabel.Location = new System.Drawing.Point(12, 162);
+            this.batchSizeLabel.Location = new System.Drawing.Point(12, 203);
             this.batchSizeLabel.Name = "batchSizeLabel";
             this.batchSizeLabel.Size = new System.Drawing.Size(90, 23);
             this.batchSizeLabel.TabIndex = 6;
@@ -102,7 +103,7 @@
             // 
             // BatchSizeBox
             // 
-            this.BatchSizeBox.Location = new System.Drawing.Point(12, 188);
+            this.BatchSizeBox.Location = new System.Drawing.Point(12, 229);
             this.BatchSizeBox.Name = "BatchSizeBox";
             this.BatchSizeBox.Size = new System.Drawing.Size(111, 20);
             this.BatchSizeBox.TabIndex = 7;
@@ -152,11 +153,22 @@
             this.AtiveSignals.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.AtiveSignals.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // buttonLoadDir
+            // 
+            this.buttonLoadDir.Location = new System.Drawing.Point(13, 54);
+            this.buttonLoadDir.Name = "buttonLoadDir";
+            this.buttonLoadDir.Size = new System.Drawing.Size(111, 37);
+            this.buttonLoadDir.TabIndex = 11;
+            this.buttonLoadDir.Text = "Загрузить Дерикторию\r\n\r\n";
+            this.buttonLoadDir.UseVisualStyleBackColor = true;
+            this.buttonLoadDir.Click += new System.EventHandler(this.ButtonLoadDirClick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonLoadDir);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.PickOutputFolder);
             this.Controls.Add(this.DeviceListBox);
@@ -173,6 +185,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button buttonLoadDir;
 
         private System.Windows.Forms.DataGridViewCheckBoxColumn AtiveSignals;
         private System.Windows.Forms.DataGridViewCheckBoxColumn MainSignal;

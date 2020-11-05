@@ -86,6 +86,8 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
 
     void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::stringstream& ss, int mainSignal, std::vector<int>& actives, std::string filename, int currentShift)
     {
+        
+
         float** batch = (float**)malloc(signalCount*sizeof(float*));
         for(int k = 0; k < signalCount; k++)
         {
@@ -95,7 +97,6 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
 
         for (int batchIndex = 0; batchIndex < n - batchSize; batchIndex += batchSize)
         {
-            ss  << "Main Signal_" << mainSignal << " Shift_" << currentShift << " Window_" << batchIndex << " " << filename << std::endl;
             for(int k =0; k < signalCount; k ++)
             {
                 for(int j = 0; j < batchSize; j++)
@@ -105,10 +106,9 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
             }
 
             float * result = gpgpu_correlation_mat(batch, batchSize, signalCount, mainSignal, actives);
-
             for(int j = 0; j < actives.size(); j++)
             {   
-                ss  <<  "Active_" << actives[j] << " " << result[j] << "\n";
+                ss << result[j] << "\t\t";
             }
             ss << std::endl;
             free(result);
@@ -131,6 +131,11 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
         int mainSignal, std::vector<int>& actives)
     {
         std::stringstream ss;
+        for(int i = 0; i < actives.size(); i++)
+        {
+            ss << "Active"  << actives[i] << "\t\t";
+        }
+        ss << std::endl;
         for(int i = 0; i < n; i+= shiftWidth)
         {
             for(int k = 0; k < signalCount; k++)
