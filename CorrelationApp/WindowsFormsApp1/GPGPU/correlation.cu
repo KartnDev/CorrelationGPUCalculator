@@ -222,7 +222,7 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
 
 int main(int argc, char** argv)
 {
-    system("pause");
+
     if(argc < 7)
     {
         std::cerr << "Bad parameters... Argc: " << argc << std::endl;
@@ -236,7 +236,7 @@ int main(int argc, char** argv)
 
     int mainSignal = std::stoi(argv[6]);
     std::vector<int> actives;
-
+    
     for(int i = 7; i < argc; i++)
     {
         actives.push_back(std::stoi(argv[i]));
