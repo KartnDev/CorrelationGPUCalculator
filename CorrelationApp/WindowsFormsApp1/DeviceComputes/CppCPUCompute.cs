@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using WindowsFormsApp1.Math.Statistics;
-using Cudafy;
-using Cudafy.Host;
-using Cudafy.Translator;
-using GASS.CUDA;
+﻿using System.Collections.Generic;
 
 namespace WindowsFormsApp1.DeviceComputes
 {
-    public class CUDACompute: ResultWrapper, IComputeDevice
+    public class CppCPUCompute: ResultWrapper, IComputeDevice
     {
-
         public void ShiftCompute(List<double[]> fullSignals, int shiftWidth, int batchSize, int mainSignal, List<int> actives)
         {
             string activesStr = "";
@@ -24,7 +12,7 @@ namespace WindowsFormsApp1.DeviceComputes
                 activesStr += $" {item}";
             }
 
-            string filename = @"C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\GPGPU\a.exe";
+            string filename = @"C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel.exe";
             string @params = $"{pathNamePath} {shiftWidth} {batchSize} {prevName} {outputFolder} {mainSignal}{activesStr}";
 
             var proc = System.Diagnostics.Process.Start(filename,@params);
@@ -34,7 +22,7 @@ namespace WindowsFormsApp1.DeviceComputes
         public int RoundValue { get; set; }
 
 
-        public CUDACompute(string outputFolder, string filePath) : base(outputFolder, filePath)
+        public CppCPUCompute(string outputFolder, string filePath) : base(outputFolder, filePath)
         {
 
         }

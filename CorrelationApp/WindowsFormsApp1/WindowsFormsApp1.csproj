@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceComputes\CppCPUCompute.cs" />
     <Compile Include="DeviceComputes\CPUCompute.cs" />
     <Compile Include="DeviceComputes\CUDACompute.cs" />
     <Compile Include="DeviceComputes\IComputeDevice.cs" />

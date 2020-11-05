@@ -14,9 +14,10 @@
 #include <algorithm>
 
 
-float* gpgpu_correlation_mat(float** signals, int n, int signal_count);
-void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize);
-void shift_compute(float** fullSignals, int n, int signalCount, int shiftWidth, int batchSize);
+float* gpgpu_correlation_mat(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives);
+void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::stringstream& ss, int mainSignal, std::vector<int>& actives);
+void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::string prev_filename, std::string outputPath, 
+    int mainSignal, std::vector<int>& actives);
 void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss, std::string outputPath);
 
     __global__ void correlation(float *x, float *y, float *num, float *denom, unsigned int n, float avg_x, float avg_y)
@@ -83,9 +84,8 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
 
 
 
-    void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::stringstream& ss)
+    void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::stringstream& ss, int mainSignal, std::vector<int>& actives, std::string filename, int currentShift)
     {
-
         float** batch = (float**)malloc(signalCount*sizeof(float*));
         for(int k = 0; k < signalCount; k++)
         {
@@ -95,8 +95,8 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
 
         for (int batchIndex = 0; batchIndex < n - batchSize; batchIndex += batchSize)
         {
-            ss << "Batch " << batchIndex << std::endl;
-            for(int k = 0; k < signalCount; k++)
+            ss  << "Main Signal_" << mainSignal << " Shift_" << currentShift << " Window_" << batchIndex << " " << filename << std::endl;
+            for(int k =0; k < signalCount; k ++)
             {
                 for(int j = 0; j < batchSize; j++)
                 {
@@ -104,16 +104,13 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
                 }
             }
 
-            float * result = gpgpu_correlation_mat(batch, batchSize, signalCount);
+            float * result = gpgpu_correlation_mat(batch, batchSize, signalCount, mainSignal, actives);
 
-            for(int i = 0; i < signalCount; i++)
-            {
-                for(int j = 0; j < signalCount; j++)
-                {   
-                   ss << " " << result[i * signalCount + j];
-                }
-                ss << "\n";
+            for(int j = 0; j < actives.size(); j++)
+            {   
+                ss  <<  "Active_" << actives[j] << " " << result[j] << "\n";
             }
+            ss << std::endl;
             free(result);
         }
         //freeing
@@ -130,19 +127,19 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
         std::rotate(a, a + size - shift, a + size);
     }
 
-    void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::string prev_filename, std::string outputPath)
+    void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::string prev_filename, std::string outputPath, 
+        int mainSignal, std::vector<int>& actives)
     {
         std::stringstream ss;
         for(int i = 0; i < n; i+= shiftWidth)
         {
-            ss << "Shift:" << i << "\n";
             for(int k = 0; k < signalCount; k++)
             {
                 circularShift(currentShiftSignals[k], n, shiftWidth);
             }
             
 
-            SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, ss);
+            SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, ss, mainSignal, actives, prev_filename, i);
         }
         
         write_file(shiftWidth, batchSize, prev_filename, ss, outputPath);
@@ -151,34 +148,24 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
 
     void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss, std::string outputPath)
     {
-        auto start = std::chrono::system_clock::now();
-        // Some computation here
-        auto end = std::chrono::system_clock::now();
-    
-        std::chrono::duration<double> elapsed_seconds = end-start;
-        std::time_t end_time = std::chrono::system_clock::to_time_t(end);
-    
-        std::string date = std::ctime(&end_time);
-        remove_if(date.begin(), date.end(), isspace);
-        std::replace( date.begin(), date.end(), ':', '_');
-        std::replace( date.begin(), date.end(), '\n', '_');
-        std::replace( date.begin(), date.end(), '\t', '_');
 
-        std::string filename = outputPath + "\\" + std::to_string(shiftWidth) + "_" + std::to_string(batchSize ) + "_"  + date + prev_filename;
+        std::string filename = outputPath + "\\" + std::to_string(shiftWidth) + " " + std::to_string(batchSize ) + " "  + prev_filename;
+
         std::ofstream outFile(filename);
         std::cout << filename << std::endl;
         outFile << ss.rdbuf();
+
         outFile.close();
     }
 
 
 
-    float* gpgpu_correlation_mat(float** signals, int n, int signal_count)
+    float* gpgpu_correlation_mat(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives)
     {
         dim3 gridSize = 256;
         dim3 blockSize = 256;
 
-        float* result = (float*)malloc(signal_count * signal_count * sizeof(float));
+        float* result = (float*)malloc(actives.size() * sizeof(float));
 
         float *denom_res = (float*)malloc(sizeof(float));   
         float *num_res = (float*)malloc(sizeof(float));
@@ -194,24 +181,23 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
 
         float x_mean, y_mean;
 
-        for(int i = 0; i < signal_count; i++)
+        for(int i = 0; i < actives.size(); i++)
         {
-            for(int j = 0; j < signal_count; j++)
-            {   
-                cudaMemset(d_prod_num, 0.0f, sizeof(float));
-                cudaMemset(d_prod_denom, 0.0f, sizeof(float));
-                cudaMemcpyAsync(d_x, (void*)signals[i], n*sizeof(float), cudaMemcpyHostToDevice);
-                cudaMemcpyAsync(d_y, (void*)signals[j], n*sizeof(float), cudaMemcpyHostToDevice);
+               
+            cudaMemset(d_prod_num, 0.0f, sizeof(float));
+            cudaMemset(d_prod_denom, 0.0f, sizeof(float));
+            cudaMemcpyAsync(d_x, (void*)signals[mainSignal], n*sizeof(float), cudaMemcpyHostToDevice);
+            cudaMemcpyAsync(d_y, (void*)signals[actives[i]], n*sizeof(float), cudaMemcpyHostToDevice);
 
-                x_mean = mean(signals[i], n);
-                y_mean = mean(signals[j], n);
+            x_mean = mean(signals[mainSignal], n);
+            y_mean = mean(signals[actives[i]], n);
 
-                correlation<<<gridSize, blockSize>>>(d_x, d_y, d_prod_num, d_prod_denom, n, x_mean, y_mean);
-                cudaMemcpyAsync(num_res, d_prod_num, sizeof(float), cudaMemcpyDeviceToHost);
-                cudaMemcpyAsync(denom_res, d_prod_denom, sizeof(float), cudaMemcpyDeviceToHost);
+            correlation<<<gridSize, blockSize>>>(d_x, d_y, d_prod_num, d_prod_denom, n, x_mean, y_mean);
+            cudaMemcpyAsync(num_res, d_prod_num, sizeof(float), cudaMemcpyDeviceToHost);
+            cudaMemcpyAsync(denom_res, d_prod_denom, sizeof(float), cudaMemcpyDeviceToHost);
 
-                result[i * signal_count + j] = (*num_res) / (*denom_res);
-            }
+            result[i] = (*num_res) / (*denom_res);
+           
         }
 
         cudaFree(d_prod_num);
@@ -231,15 +217,24 @@ void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::s
 
 int main(int argc, char** argv)
 {
-    if(argc != 6)
+    system("pause");
+    if(argc < 7)
     {
-        std::cerr << "Bad parameters..." << std::endl;
+        std::cerr << "Bad parameters... Argc: " << argc << std::endl;
         for(int i = 0; i < argc; i++)
         {
             std::cout << argv[i] << std::endl;
         }
         system("pause");
         return -1;
+    }
+
+    int mainSignal = std::stoi(argv[6]);
+    std::vector<int> actives;
+
+    for(int i = 7; i < argc; i++)
+    {
+        actives.push_back(std::stoi(argv[i]));
     }
 
     std::ifstream f;
@@ -287,11 +282,11 @@ int main(int argc, char** argv)
     }
 
     std::cout << "Start Computing..." << std::endl;
-    ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]),std::stoi(argv[3]), argv[4], argv[5]);
+    ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]),std::stoi(argv[3]), argv[4], argv[5], mainSignal, actives);
     std::cout << "End Computing" << std::endl;
-    for(int i = 0; i < signal_count; i++)
-    {
-        free(h_x[i]); 
-    }
+    for (int i = 0; i < actives.size(); i++)
+	{
+		free(h_x[i]);
+	}
     free(h_x);
 }

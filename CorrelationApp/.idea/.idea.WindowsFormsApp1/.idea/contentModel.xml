@@ -9,6 +9,7 @@
         <e p="App.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="DeviceComputes" t="Include">
+          <e p="CppCPUCompute.cs" t="Include" />
           <e p="CPUCompute.cs" t="Include" />
           <e p="CUDACompute.cs" t="Include" />
           <e p="IComputeDevice.cs" t="Include" />

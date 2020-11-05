@@ -18,7 +18,7 @@ namespace WindowsFormsApp1.DeviceComputes
         {
         }
         
-        public void ShiftCompute(List<double[]> fullSignals, int shiftWidth, int batchSize)
+        public void ShiftCompute(List<double[]> fullSignals, int shiftWidth, int batchSize, int mainSignal, List<int> actives)
         {
             Parallel.For(0, fullSignals.First().Length, 
                 new ParallelOptions(){MaxDegreeOfParallelism = MaxParallelDegree},
