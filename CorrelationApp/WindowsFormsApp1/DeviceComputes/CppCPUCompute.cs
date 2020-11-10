@@ -12,7 +12,7 @@ namespace WindowsFormsApp1.DeviceComputes
                 activesStr += $" {item}";
             }
 
-            string filename = @"C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel.exe";
+            string filename = @"C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\Release\OmpParallel.exe";
             string @params = $"{pathNamePath} {shiftWidth} {batchSize} {prevName} {outputFolder} {mainSignal}{activesStr}";
 
             var proc = System.Diagnostics.Process.Start(filename,@params);
