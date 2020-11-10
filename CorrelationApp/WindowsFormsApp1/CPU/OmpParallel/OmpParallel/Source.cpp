@@ -109,7 +109,7 @@ void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shi
 	}
 
 
-	for (int batchIndex = 0; batchIndex < n; batchIndex += batchStep)
+	for (int batchIndex = 0; batchIndex < (n - batchSize); batchIndex += batchStep)
 	{
 		for (int k = 0; k < signalCount; k++)
 		{

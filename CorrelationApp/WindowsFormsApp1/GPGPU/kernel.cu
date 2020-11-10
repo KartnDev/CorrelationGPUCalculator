@@ -4,7 +4,7 @@
 #include <iostream>
 
 
- __device__ float correlationCoefficient(float* X, int n, float* res)
+ __device__ void correlationCoefficient(float* X, int n, float* res)
 {
     for (int i = 0; i < n; i++)
 	{
@@ -29,12 +29,12 @@
 		// Use Fractional Rank formula 
 		// fractional_rank = r + (n-1)/2 
 		res[i] = r + (s - 1) * 0.5;
-	}
+    }
 }
 
 
-__global__ void window_slide_correlations(float*** signals, int n, int sig_count, int window_size, int window_step, float** result,
-                                            int* active_signals, int main_signal)
+__global__ void window_slide_correlations(float*** signals, unsigned int n, int sig_count, int window_size, int window_step, float** result,
+                                            int* active_signals, unsigned int active_count, int main_signal)
 {
     int block_grid_id = blockIdx.x;
     int steps = (int)n / window_step;
@@ -49,7 +49,7 @@ __global__ void window_slide_correlations(float*** signals, int n, int sig_count
         // computing main signal rank
         if(threadIdx.x == 0)
         {
-            cudaMalloc((void*)main_rank, n * sizeof(float));
+            main_rank = (float*)malloc(n * sizeof(float));
             correlationCoefficient(current_window_sig[main_signal], n, main_rank);
         }
         __syncthreads();
@@ -59,34 +59,168 @@ __global__ void window_slide_correlations(float*** signals, int n, int sig_count
         if(threadId < sig_count)
         {
             float* rank_at_thread;
-            cudaMalloc((void*)rank_at_thread, n * sizeof(float));
+            rank_at_thread = (float*)malloc(n * sizeof(float));
             correlationCoefficient(current_window_sig[threadId], n, rank_at_thread);
             
             float sum = 0.0f;
             for (int i = 0; i < n; i++)
             {
-                sum += (rank_X[i] - rank_Y[i]) * (rank_X[i] - rank_Y[i]);
+                sum += (main_rank[i] - rank_at_thread[i]) * (main_rank[i] - rank_at_thread[i]);
             }
             result[block_grid_id][threadId] =  1.0 - 6.0 * sum / (n * n * n - n);
-
         }
-        
-
         
     }
     
 }
 
-
-
-int main()
+void circularShift(float* a, int size, int shift)
 {
-    dim3 threadsPerBlock(2);
-    dim3 numBlocks(20);
-    window_slide_correlations<<<numBlocks, threadsPerBlock>>>(0, 10000, 3, 0, 1000, 1002);
-    
+	assert(size >= shift);
+	std::rotate(a, a + size - shift, a + size);
+}
 
 
-    system("pause");
+float** split_by_windows(float* signal, int window_size, int window_step, int n)
+{
+    int window_count = (int)(n - window_size) / window_step;
 
+    float** allocated_res = (float**)malloc(window_count * sizeof(float*));
+    for(int i = 0; i < window_count; i++)
+    {
+        allocated_res[i] = (float*)malloc(window_size * sizeof(float));
+    }
+
+    for(int curr_win = 0; curr_win < window_count; curr_win++)
+    {
+        for(int j = 0; j < window_size; j++)
+        {
+            allocated_res[curr_win][j] = signal[j + curr_win * window_step];
+        }
+    }
+    return allocated_res;
+}
+
+
+float** get_correlations_shift(float** signals, int signals_count, int n, int window_size, int window_step, int* active_signals, unsigned int active_count, int main_signal)
+{
+    float*** splitted_by_windows = (float***)malloc(signals_count * sizeof(float**));
+
+    for(int curr_sig = 0; curr_sig < signals_count; curr_sig++)
+    {
+        splitted_by_windows[curr_sig] = split_by_windows(signals[curr_sig], window_size, window_step, n);
+    }
+
+    float** device_result;
+    int window_count = (int)(n - window_size) / window_step;
+
+    cudaMalloc((void**)device_result, window_count * sizeof(float*));
+    for(int i = 0; i < window_count; i++)
+    {
+        cudaMalloc((void**)device_result[i], (active_count + 1) * sizeof(float));
+    }
+    int* gpu_actives;
+    cudaMalloc((void**)gpu_actives, active_count * sizeof(float));
+    cudaMemcpy(gpu_actives, active_signals, active_count*sizeof(float), cudaMemcpyHostToDevice);
+
+    window_slide_correlations<<<window_count, (active_count+1)>>>(splitted_by_windows, n, signals_count, window_size, window_step, device_result, gpu_actives, active_count, main_signal);
+
+    float** result = (float**)malloc(window_count * sizeof(float*));
+    for(int i = 0; i < window_count; i++)
+    {
+        result[i] = (float*)malloc(window_size * sizeof(float));
+    }
+
+
+    cudaMemcpy(result, device_result, active_count*sizeof(float), cudaMemcpyDeviceToHost);
+
+    return result;
+}
+
+
+
+
+
+
+int main(int argc, char** argv)
+{
+	if (argc < 8)
+	{
+		std::cerr << "Bad parameters... Argc: " << argc << std::endl;
+		for (int i = 0; i < argc; i++)
+		{
+			std::cout << argv[i] << std::endl;
+		}
+		system("pause");
+		return -1;
+	}
+
+	int mainSignal = std::stoi(argv[7]);
+	std::vector<int> actives;
+
+	for (int i = 8; i < argc; i++)
+	{
+		actives.push_back(std::stoi(argv[i]));
+	}
+
+	std::ifstream f;
+	f.open(argv[1]);
+
+	if (!f.good())
+	{
+		std::cerr << "Bad filepath input (bad file)..." << std::endl;
+		system("pause");
+		return -2;
+	}
+
+
+	std::string line, val;
+	std::vector<std::vector<float>> array;
+
+	while (std::getline(f, line))
+	{
+		std::vector<float> v;
+		std::stringstream s(line);
+		while (getline(s, val, ' '))
+		{
+			v.push_back(std::stof(val));
+		}
+		array.push_back(v);
+	}
+
+	unsigned int n = array.size();
+	int signal_count = array[0].size();
+
+
+	float** h_x = (float**)malloc(signal_count * sizeof(float*));
+
+	for (int i = 0; i < signal_count; i++)
+	{
+		h_x[i] = (float*)malloc(n * sizeof(float));
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < signal_count; j++)
+		{
+			h_x[j][i] = array[i][j];
+		}
+	}
+
+	std::cout << "Start Computing..." << std::endl;
+	auto start = std::chrono::high_resolution_clock::now();
+	
+	ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]), std::stoi(argv[3]), std::stoi(argv[4]), argv[5],  argv[6], mainSignal, actives);
+	
+	auto stop = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+
+	std::cout << "End Computing" << std::endl;
+	std::cout << "Duration: " << (double)duration.count() / 1000 << std::endl;
+	for (int i = 0; i < actives.size(); i++)
+	{
+		free(h_x[i]);
+	}
+	free(h_x);
+	system("pause");
 }
