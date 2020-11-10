@@ -41,6 +41,8 @@
             this.MainSignal = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.AtiveSignals = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.buttonLoadDir = new System.Windows.Forms.Button();
+            this.batchStepBox = new System.Windows.Forms.TextBox();
+            this.labelBatchStep = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize) (this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,7 +70,7 @@
             // 
             this.computeDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.computeDevice.FormattingEnabled = true;
-            this.computeDevice.Items.AddRange(new object[] {"CPU_Parallel", "OpenBLAS", "GPU_CUDA", "CPU_Cpp"});
+            this.computeDevice.Items.AddRange(new object[] {"GPU_CUDA", "CPU_Cpp"});
             this.computeDevice.Location = new System.Drawing.Point(592, 12);
             this.computeDevice.Name = "computeDevice";
             this.computeDevice.Size = new System.Drawing.Size(195, 21);
@@ -77,25 +79,25 @@
             // 
             // shiftBox
             // 
-            this.shiftBox.Location = new System.Drawing.Point(12, 169);
+            this.shiftBox.Location = new System.Drawing.Point(12, 165);
             this.shiftBox.Name = "shiftBox";
             this.shiftBox.Size = new System.Drawing.Size(111, 20);
             this.shiftBox.TabIndex = 4;
-            this.shiftBox.Text = "100";
+            this.shiftBox.Text = "20\r\n";
             // 
             // shiftLabel
             // 
             this.shiftLabel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.shiftLabel.Location = new System.Drawing.Point(13, 143);
             this.shiftLabel.Name = "shiftLabel";
-            this.shiftLabel.Size = new System.Drawing.Size(90, 23);
+            this.shiftLabel.Size = new System.Drawing.Size(90, 19);
             this.shiftLabel.TabIndex = 5;
             this.shiftLabel.Text = "Шаг сдвига:";
             // 
             // batchSizeLabel
             // 
             this.batchSizeLabel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.batchSizeLabel.Location = new System.Drawing.Point(12, 203);
+            this.batchSizeLabel.Location = new System.Drawing.Point(12, 220);
             this.batchSizeLabel.Name = "batchSizeLabel";
             this.batchSizeLabel.Size = new System.Drawing.Size(90, 23);
             this.batchSizeLabel.TabIndex = 6;
@@ -103,7 +105,7 @@
             // 
             // BatchSizeBox
             // 
-            this.BatchSizeBox.Location = new System.Drawing.Point(12, 229);
+            this.BatchSizeBox.Location = new System.Drawing.Point(12, 236);
             this.BatchSizeBox.Name = "BatchSizeBox";
             this.BatchSizeBox.Size = new System.Drawing.Size(111, 20);
             this.BatchSizeBox.TabIndex = 7;
@@ -163,11 +165,30 @@
             this.buttonLoadDir.UseVisualStyleBackColor = true;
             this.buttonLoadDir.Click += new System.EventHandler(this.ButtonLoadDirClick);
             // 
+            // batchStepBox
+            // 
+            this.batchStepBox.Location = new System.Drawing.Point(12, 281);
+            this.batchStepBox.Name = "batchStepBox";
+            this.batchStepBox.Size = new System.Drawing.Size(111, 20);
+            this.batchStepBox.TabIndex = 13;
+            this.batchStepBox.Text = "100";
+            // 
+            // labelBatchStep
+            // 
+            this.labelBatchStep.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelBatchStep.Location = new System.Drawing.Point(13, 264);
+            this.labelBatchStep.Name = "labelBatchStep";
+            this.labelBatchStep.Size = new System.Drawing.Size(90, 23);
+            this.labelBatchStep.TabIndex = 12;
+            this.labelBatchStep.Text = "Шаг окна: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.batchStepBox);
+            this.Controls.Add(this.labelBatchStep);
             this.Controls.Add(this.buttonLoadDir);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.PickOutputFolder);
@@ -185,6 +206,9 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.TextBox batchStepBox;
+        private System.Windows.Forms.Label labelBatchStep;
 
         private System.Windows.Forms.Button buttonLoadDir;
 

@@ -13,44 +13,18 @@
 #include <cmath>
 
 float* cpgpu_correlation_mat(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives);
-void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::stringstream& ss, int mainSignal, std::vector<int>& actives);
-void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::string prev_filename, std::string outputPath,
+void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::stringstream& ss, int mainSignal, std::vector<int>& actives);
+void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
 	int mainSignal, std::vector<int>& actives);
 void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss, std::string outputPath);
 float* cpgpu_correlation_spearmanr(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives);
 
 typedef std::vector<float> Vector;
 
-void rankify(float* X, int n, float* res) {
-
-
-	for (int i = 0; i < n; i++)
-	{
-		int r = 1, s = 1;
-
-		// Count no of smaller elements 
-		// in 0 to i-1 
-		for (int j = 0; j < i; j++) {
-			if (X[j] < X[i]) r++;
-			if (X[j] == X[i]) s++;
-		}
-
-		// Count no of smaller elements 
-		// in i+1 to N-1 
-		for (int j = i + 1; j < n; j++) {
-			if (X[j] < X[i]) r++;
-			if (X[j] == X[i]) s++;
-		}
-
-		// Use Fractional Rank formula 
-		// fractional_rank = r + (n-1)/2 
-		res[i] = r + (s - 1) * 0.5;
-	}
-}
 
 void rankify_parallel(float* X, int n, float* res) {
 
-
+#pragma omp parallel for
 	for (int i = 0; i < n; i++)
 	{
 		int r = 1, s = 1;
@@ -93,6 +67,7 @@ float correlationCoefficient(float* rank_X, float* rank_Y, int n)
 }
 
 
+
 float correlation(float* x, float* y, int n)
 {
 	float avg_x = 0, avg_y = 0;
@@ -121,7 +96,7 @@ float correlation(float* x, float* y, int n)
 
 
 
-void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::stringstream& ss, int mainSignal, std::vector<int>& actives, std::string filename, int currentShift)
+void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::stringstream& ss, int mainSignal, std::vector<int>& actives, std::string filename, int currentShift)
 {
 
 
@@ -132,7 +107,7 @@ void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shi
 	}
 
 
-	for (int batchIndex = 0; batchIndex < n - batchSize; batchIndex += batchSize)
+	for (int batchIndex = 0; batchIndex < n; batchIndex += batchStep)
 	{
 		for (int k = 0; k < signalCount; k++)
 		{
@@ -164,7 +139,7 @@ void circularShift(float* a, int size, int shift)
 	std::rotate(a, a + size - shift, a + size);
 }
 
-void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, std::string prev_filename, std::string outputPath,
+void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
 	int mainSignal, std::vector<int>& actives)
 {
 	std::stringstream ss;
@@ -175,14 +150,10 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 	ss << std::endl;
 
 	for (int i = 0; i < n; i += shiftWidth)
-	{
-		for (int k = 0; k < signalCount; k++)
-		{
-			circularShift(currentShiftSignals[k], n, shiftWidth);
-		}
+	{	
+		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);	
 
-
-		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, ss, mainSignal, actives, prev_filename, i);
+		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, ss, mainSignal, actives, prev_filename, i);
 	}
 
 	write_file(shiftWidth, batchSize, prev_filename, ss, outputPath);
@@ -224,15 +195,13 @@ float* cpgpu_correlation_spearmanr(float** signals, int n, int signal_count, int
 	float* rank_y = (float*)malloc(n * sizeof(float));
 	float* rank_x = (float*)malloc(n * sizeof(float));
 
-	rankify(signals[mainSignal], n, rank_x);
-	
 
-#pragma omp parallel for
+	rankify_parallel(signals[mainSignal], n, rank_x);
 	for (int i = 0; i < actives.size(); i++)
 	{
-		
-		rankify(signals[actives[i]], n, rank_y);
-		
+
+		rankify_parallel(signals[actives[i]], n, rank_y);
+
 		result[i] = correlationCoefficient(rank_x, rank_y, n);
 	}
 
@@ -245,7 +214,7 @@ float* cpgpu_correlation_spearmanr(float** signals, int n, int signal_count, int
 
 int main(int argc, char** argv)
 {
-	if (argc < 7)
+	if (argc < 8)
 	{
 		std::cerr << "Bad parameters... Argc: " << argc << std::endl;
 		for (int i = 0; i < argc; i++)
@@ -256,10 +225,10 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
-	int mainSignal = std::stoi(argv[6]);
+	int mainSignal = std::stoi(argv[7]);
 	std::vector<int> actives;
 
-	for (int i = 7; i < argc; i++)
+	for (int i = 8; i < argc; i++)
 	{
 		actives.push_back(std::stoi(argv[i]));
 	}
@@ -310,7 +279,9 @@ int main(int argc, char** argv)
 
 	std::cout << "Start Computing..." << std::endl;
 	auto start = std::chrono::high_resolution_clock::now();
-	ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]), std::stoi(argv[3]), argv[4], argv[5], mainSignal, actives);
+	
+	ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]), std::stoi(argv[3]), std::stoi(argv[4]), argv[5],  argv[6], mainSignal, actives);
+	
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 

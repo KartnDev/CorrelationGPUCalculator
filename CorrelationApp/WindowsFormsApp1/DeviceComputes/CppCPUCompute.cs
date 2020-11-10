@@ -4,7 +4,7 @@ namespace WindowsFormsApp1.DeviceComputes
 {
     public class CppCPUCompute: ResultWrapper, IComputeDevice
     {
-        public void ShiftCompute(List<double[]> fullSignals, int shiftWidth, int batchSize, int mainSignal, List<int> actives)
+        public void ShiftCompute(List<double[]> fullSignals, int shiftWidth, int batchSize, int batchStep, int mainSignal, List<int> actives)
         {
             string activesStr = "";
             foreach (var item in actives)
@@ -13,7 +13,7 @@ namespace WindowsFormsApp1.DeviceComputes
             }
 
             string filename = @"C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\Release\OmpParallel.exe";
-            string @params = $"{pathNamePath} {shiftWidth} {batchSize} {prevName} {outputFolder} {mainSignal}{activesStr}";
+            string @params = $"{pathNamePath} {shiftWidth} {batchSize} {batchStep} {prevName} {outputFolder} {mainSignal}{activesStr}";
 
             var proc = System.Diagnostics.Process.Start(filename,@params);
         }
