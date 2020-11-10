@@ -31,14 +31,16 @@ void rankify_parallel(float* X, int n, float* res) {
 
 		// Count no of smaller elements 
 		// in 0 to i-1 
-		for (int j = 0; j < i; j++) {
+		for (int j = 0; j < i; j++) 
+		{
 			if (X[j] < X[i]) r++;
 			if (X[j] == X[i]) s++;
 		}
 
 		// Count no of smaller elements 
 		// in i+1 to N-1 
-		for (int j = i + 1; j < n; j++) {
+		for (int j = i + 1; j < n; j++) 
+		{
 			if (X[j] < X[i]) r++;
 			if (X[j] == X[i]) s++;
 		}

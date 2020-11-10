@@ -3,138 +3,90 @@
 
 #include <iostream>
 
-__global__ void dot_product_kernel(float *rank_x, float *y_rank, float *dot, unsigned int n)
+
+ __device__ float correlationCoefficient(float* X, int n, float* res)
 {
-	unsigned int index = threadIdx.x + blockDim.x*blockIdx.x;
-	unsigned int stride = blockDim.x*gridDim.x;
+    for (int i = 0; i < n; i++)
+	{
+		int r = 1, s = 1;
 
-	__shared__ float cache[256];
-
-	double temp = 0.0;
-    while(index < n)
-    {
-		temp += (rank_x[index] - y_rank[index]) * (rank_x[index] - y_rank[index]);
-
-		index += stride;
-	}
-
-	cache[threadIdx.x] = temp;
-
-	__syncthreads();
-
-	// reduction
-	unsigned int i = blockDim.x/2;
-    while(i != 0)
-    {
-        if(threadIdx.x < i)
-        {
-			cache[threadIdx.x] += cache[threadIdx.x + i];
+		// Count no of smaller elements 
+		// in 0 to i-1 
+		for (int j = 0; j < i; j++) 
+		{
+			if (X[j] < X[i]) r++;
+			if (X[j] == X[i]) s++;
 		}
-		__syncthreads();
-		i /= 2;
-	}
 
+		// Count no of smaller elements 
+		// in i+1 to N-1 
+		for (int j = i + 1; j < n; j++) 
+		{
+			if (X[j] < X[i]) r++;
+			if (X[j] == X[i]) s++;
+		}
 
-    if(threadIdx.x == 0)
-    {
-		atomicAdd(dot, cache[0]);
+		// Use Fractional Rank formula 
+		// fractional_rank = r + (n-1)/2 
+		res[i] = r + (s - 1) * 0.5;
 	}
 }
 
 
-
-
-float* gpgpu_spearman(float** rank_x, float** rank_y, int n, int signal_count)
+__global__ void window_slide_correlations(float*** signals, int n, int sig_count, int window_size, int window_step, float** result,
+                                            int* active_signals, int main_signal)
 {
-    dim3 gridSize = 256;
-    dim3 blockSize = 256;
+    int block_grid_id = blockIdx.x;
+    int steps = (int)n / window_step;
 
-    float *h_prod;
-    
-
-    h_prod = (float*)malloc(signal_count * signal_count * sizeof(float));   
-
-    float *d_prod;
-    float *d_x, *d_y;
-    cudaMalloc((void**)&d_prod, sizeof(float));
-    cudaMalloc((void**)&d_x, n*sizeof(float));
-    cudaMalloc((void**)&d_y, n*sizeof(float));
-        
-        
-    for(int i = 0; i < signal_count; i++)
+    // invoke all window count 
+    if(block_grid_id < steps)
     {
-        for (int j = 0; j < signal_count; j++)
+        float** current_window_sig = signals[block_grid_id];
+
+        __shared__ float* main_rank;
+
+        // computing main signal rank
+        if(threadIdx.x == 0)
         {
-            cudaMemset(d_prod, 0.0, sizeof(float));
-            cudaMemcpy(d_x, rank_x[i], n*sizeof(float), cudaMemcpyHostToDevice);
-            cudaMemcpy(d_y, rank_x[j], n*sizeof(float), cudaMemcpyHostToDevice);
-            
-            dot_product_kernel<<<gridSize, blockSize>>>(d_x, d_y, d_prod, n);
-            
-            cudaMemcpy((void*)&(h_prod[signal_count * i + j]), d_prod, sizeof(float), cudaMemcpyDeviceToHost);
-            h_prod[signal_count * i + j] = 1.0f - (6.0f * h_prod[signal_count * i + j]) / (n*n*n - n);
+            cudaMalloc((void*)main_rank, n * sizeof(float));
+            correlationCoefficient(current_window_sig[main_signal], n, main_rank);
         }
+        __syncthreads();
+
+        int threadId = threadIdx.x;
+
+        if(threadId < sig_count)
+        {
+            float* rank_at_thread;
+            cudaMalloc((void*)rank_at_thread, n * sizeof(float));
+            correlationCoefficient(current_window_sig[threadId], n, rank_at_thread);
+            
+            float sum = 0.0f;
+            for (int i = 0; i < n; i++)
+            {
+                sum += (rank_X[i] - rank_Y[i]) * (rank_X[i] - rank_Y[i]);
+            }
+            result[block_grid_id][threadId] =  1.0 - 6.0 * sum / (n * n * n - n);
+
+        }
+        
+
+        
     }
-
-
-    free(h_prod);
-
-	cudaFree(d_prod);
-	cudaFree(d_x);
-    cudaFree(d_y);
     
-    return h_prod;
 }
+
 
 
 int main()
 {
-	unsigned int n = 10;
-    int signal_count = 2;
-        
-
-    float** h_x = (float**)malloc(signal_count*sizeof(float*));
+    dim3 threadsPerBlock(2);
+    dim3 numBlocks(20);
+    window_slide_correlations<<<numBlocks, threadsPerBlock>>>(0, 10000, 3, 0, 1000, 1002);
     
-    for(int i = 0; i < signal_count; i++)
-    {
-        h_x[i] = (float*)malloc(n * sizeof(float));
-    }
 
 
-    
-    // fill host array with data
-    // for(int i = 0; i < signal_count; i++)
-    // {
-    //     for(int j = 0; j < n; j++)
-    //     {
-    //         h_x[i][j] = (float)(rand()%n) / n;
-    //     }
-    // }
-
-    h_x[0][0] = 56;  h_x[1][0] = 66;
-    h_x[0][1] = 75;  h_x[1][1] = 70; 
-    h_x[0][2] = 45;  h_x[1][2] = 40; 
-    h_x[0][3] = 71;  h_x[1][3] = 60; 
-    h_x[0][4] = 61;  h_x[1][4] = 65; 
-    h_x[0][5] = 64;  h_x[1][5] = 56; 
-    h_x[0][6] = 58;  h_x[1][6] = 59; 
-    h_x[0][7] = 80;  h_x[1][7] = 77; 
-    h_x[0][8] = 76;  h_x[1][8] = 67;  
-    h_x[0][9] = 61;  h_x[1][9] = 63; 	
-
-
-    float* val = gpgpu_spearman(h_x, h_x, n, signal_count);
-
-    for(int i = 0; i < signal_count; i++)
-    {
-        for (int j = 0; j < signal_count; j++)
-        {
-            std::cout << val[i * signal_count + j] << "\t\t";
-        }
-        std::cout << std::endl;
-    }
-	
-	free(h_x);
     system("pause");
 
 }
