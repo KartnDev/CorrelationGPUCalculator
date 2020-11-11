@@ -1,7 +1,23 @@
 #include "cuda_runtime.h"
-#include "cuda.h"
-
+#include "device_launch_parameters.h"
+#include <cuda.h>
 #include <iostream>
+#include <time.h>
+#include <omp.h>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <cassert>
+#include <chrono>
+#include <ctime> 
+#include <windows.h>
+#include <algorithm>
+
+void pause_say(const char* msg)
+{
+	std::cout << msg << std::endl;
+	system("pause");
+}
 
 
  __device__ void correlationCoefficient(float* X, int n, float* res)
@@ -110,9 +126,10 @@ float** get_correlations_shift(float** signals, int signals_count, int n, int wi
     {
         splitted_by_windows[curr_sig] = split_by_windows(signals[curr_sig], window_size, window_step, n);
     }
-
+	
     float** device_result;
     int window_count = (int)(n - window_size) / window_step;
+	pause_say("before on middleware allocation");
 
     cudaMalloc((void**)device_result, window_count * sizeof(float*));
     for(int i = 0; i < window_count; i++)
@@ -122,8 +139,8 @@ float** get_correlations_shift(float** signals, int signals_count, int n, int wi
     int* gpu_actives;
     cudaMalloc((void**)gpu_actives, active_count * sizeof(float));
     cudaMemcpy(gpu_actives, active_signals, active_count*sizeof(float), cudaMemcpyHostToDevice);
-
-    window_slide_correlations<<<window_count, (active_count+1)>>>(splitted_by_windows, n, signals_count, window_size, window_step, device_result, gpu_actives, active_count, main_signal);
+	pause_say("allocated, start backend");
+    window_slide_correlations<<<window_count, active_count>>>(splitted_by_windows, n, signals_count, window_size, window_step, device_result, gpu_actives, active_count, main_signal);
 
     float** result = (float**)malloc(window_count * sizeof(float*));
     for(int i = 0; i < window_count; i++)
@@ -138,7 +155,26 @@ float** get_correlations_shift(float** signals, int signals_count, int n, int wi
 }
 
 
+void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
+	int mainSignal, std::vector<int>& actives)
+{
+	int* activesArr = &actives[0];
+	
 
+	float** result = get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal);
+
+	// Writing to ss
+	int window_count = (int)(n - batchSize) / batchStep;
+	for(int i = 0; i < window_count; i++)
+    {
+		for(int j = 0; j < actives.size(); j++)
+		{
+			std::cout << result[i][j] << " ";
+		}
+		std::cout << std::endl;
+    }
+
+}
 
 
 
