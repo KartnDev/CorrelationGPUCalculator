@@ -66,18 +66,34 @@ __device__ float coorelate(float* x_rank, float* y_rank, int n)
 	return 1.0 - 6.0 * sum / (n * n * n - n);
 }
 
-__device__ float full_correlate(float* signals, int signal_count, int n, int window_size, int window_step)
+__device__ float full_correlate(float* x, float* y, int n)
 {
-	float sum = 0.0f;
-	for(int i = 0; i < 10; i++)
-	{
-		sum += i;
-	}
-	
-	return sum;
+	float* rank_x = (float*)malloc(n * sizeof(float));
+	float* rank_y = (float*)malloc(n * sizeof(float));
+
+	rankify(x, n, rank_x);
+	rankify(y, n, rank_y);
+
+	float res = coorelate(rank_x, rank_y, n);
+
+	free(rank_x);
+	free(rank_y);
+
+	return res;
 }
 
+__device__ float* current_signal_wnd(float* signals, int signal_count, int n, int window_size, int window_step, int blockId, int threadId)
+{
+	float* result = (float*)malloc(window_size * sizeof(float));
+	int window_count = (int)(n - window_size) / window_step;
 
+	for(int i = 0; i < window_size; i++)
+	{
+		result[i] = signals[threadId * (window_count * window_size) + blockId * window_size + i];
+	}
+
+	return result;
+}
 
 
 
@@ -87,7 +103,13 @@ __global__ void window_slide_correlations(float* signals, unsigned int n, int si
 	int block_grid_id = blockIdx.x;
 	int threadId = threadIdx.x;
 
-	result[block_grid_id * active_count + threadId] = full_correlate(signals, sig_count, n, window_size, window_step);
+	float* curr_x = current_signal_wnd(signals, sig_count, n, window_size, window_step, block_grid_id, main_signal);
+	float* curr_y = current_signal_wnd(signals, sig_count, n, window_size, window_step, block_grid_id, threadId);
+
+	result[block_grid_id * active_count + threadId] = full_correlate(curr_x, curr_y, window_size);
+
+	free(curr_x);
+	free(curr_y);
 }
 
 void circularShift(float* a, int size, int shift)
@@ -99,7 +121,7 @@ void circularShift(float* a, int size, int shift)
 
 float* wrap_singals_to_array_wnd(float** signals, int n, int signal_count, int window_size, int window_step)
 {
-    int window_count = (int)(n - window_size) / window_step + 1;
+    int window_count = (int)(n - window_size) / window_step;
 
     float* allocated_res = (float*)malloc(signal_count * window_size * window_count * sizeof(float));
 	
@@ -122,11 +144,12 @@ float* wrap_singals_to_array_wnd(float** signals, int n, int signal_count, int w
 
 float* get_correlations_shift(float** signals, int signals_count, int n, int window_size, int window_step, int* active_signals, unsigned int active_count, int main_signal)
 {
-	int window_count = (int)(n - window_size) / window_step + 1;
+	int window_count = (int)(n - window_size) / window_step;
 
 
 	float* splitted_by_windows = wrap_singals_to_array_wnd(signals, n, signals_count, window_size, window_step);
-	
+
+
 	float* device_data;
 	float* device_result;
 	int* gpu_actives;
@@ -135,10 +158,10 @@ float* get_correlations_shift(float** signals, int signals_count, int n, int win
 	cudaMalloc((void**)&device_data, signals_count * window_size * window_count * sizeof(float));
 	cudaMalloc((void**)&gpu_actives, active_count * sizeof(float));
 	
-	cudaMemcpy(gpu_actives, active_signals, active_count*sizeof(float), cudaMemcpyHostToDevice);
-	cudaMemcpy(device_data, splitted_by_windows, signals_count * window_size * window_count * sizeof(float), cudaMemcpyHostToDevice);
+	cudaMemcpy(gpu_actives, (void*)active_signals, active_count*sizeof(float), cudaMemcpyHostToDevice);
+	cudaMemcpy(device_data, (void*)splitted_by_windows, signals_count * window_size * window_count * sizeof(float), cudaMemcpyHostToDevice);
 
-    window_slide_correlations<<<window_count, active_count>>>(splitted_by_windows, n, signals_count, window_size, window_step, device_result, gpu_actives, active_count, main_signal);
+    window_slide_correlations<<<window_count, active_count>>>(device_data, n, signals_count, window_size, window_step, device_result, gpu_actives, active_count, main_signal);
 
 	float* result = (float*)malloc(active_count * window_count * sizeof(float));
 
@@ -157,7 +180,7 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 	float* result = get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal);
 
 	// Writing to ss
-	int window_count = (int)(n - batchSize) / batchStep + 1;
+	int window_count = (int)(n - batchSize) / batchStep ;
 	for(int i = 0; i < window_count; i++)
     {
 		for(int j = 0; j < actives.size(); j++)
@@ -173,41 +196,41 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 
 int main(int argc, char** argv)
 {
-	float** a = (float**)malloc(3 * sizeof(float*));
-	pause_say("wait");
+	// float** a = (float**)malloc(3 * sizeof(float*));
+	// pause_say("wait");
 
-	int n_count = 20;
-	int _sigs = 3;
-	int win_size = 10;
-	int win_step = 5;
-	int window_count = (int)(n_count - win_size) / win_step  + 1;
+	// int n_count = 20;
+	// int _sigs = 3;
+	// int win_size = 10;
+	// int win_step = 5;
+	// int window_count = (int)(n_count - win_size) / win_step;
 
-	for(int i = 0; i < n_count; i++)
-	{
-		a[i] = (float*)malloc(n_count * sizeof(float));
-	}
-	for(int i = 0; i < n_count; i++)
-	{
-		a[0][i] = i;
-		a[1][i] = -i;
-		a[2][i] = (i+1) * (i+1);
-	}
-	pause_say("wait");
-	float* wraped = wrap_singals_to_array_wnd(a, n_count, _sigs, win_size, win_step);
-	pause_say("wait");
-	for(int i = 0; i < _sigs; i++)
-	{
-		for(int j = 0; j < window_count; j++)
-		{
-			for(int k = 0; k < win_size; k++)
-			{
-				std::cout << wraped[i * (window_count * win_size) + j * win_size + k] << " ";
-			}
-			std::cout << " | ";
-		}
-		std::cout << "\n";
-	}
-	pause_say("wait");
+	// for(int i = 0; i < n_count; i++)
+	// {
+	// 	a[i] = (float*)malloc(n_count * sizeof(float));
+	// }
+	// for(int i = 0; i < n_count; i++)
+	// {
+	// 	a[0][i] = i;
+	// 	a[1][i] = -i;
+	// 	a[2][i] = (i+1) * (i+1);
+	// }
+	// pause_say("wait");
+	// float* wraped = wrap_singals_to_array_wnd(a, n_count, _sigs, win_size, win_step);
+	// pause_say("wait");
+	// for(int i = 0; i < _sigs; i++)
+	// {
+	// 	for(int j = 0; j < window_count; j++)
+	// 	{
+	// 		for(int k = 0; k < win_size; k++)
+	// 		{
+	// 			std::cout << wraped[i * (window_count * win_size) + j * win_size + k] << " ";
+	// 		}
+	// 		std::cout << " | ";
+	// 	}
+	// 	std::cout << "\n";
+	// }
+	// pause_say("wait");
 
 	if (argc < 8)
 	{
