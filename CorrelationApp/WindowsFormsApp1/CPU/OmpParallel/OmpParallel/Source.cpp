@@ -97,6 +97,10 @@ float correlation(float* x, float* y, int n)
 }
 
 
+inline float round3p(float x)
+{
+	return roundf(x * 10000) / 10000;
+}
 
 void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::stringstream& ss, int mainSignal, std::vector<int>& actives, std::string filename, int currentShift)
 {
@@ -122,7 +126,7 @@ void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shi
 		float* result = cpgpu_correlation_spearmanr(batch, batchSize, signalCount, mainSignal, actives);
 		for (int j = 0; j < actives.size(); j++)
 		{
-			ss << result[j] << "\t\t";
+			ss << round3p(result[j]) << "\t\t";
 		}
 		ss << std::endl;
 		free(result);

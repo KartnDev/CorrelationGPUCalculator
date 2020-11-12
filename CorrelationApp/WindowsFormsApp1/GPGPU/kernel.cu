@@ -89,7 +89,7 @@ __global__ void window_slide_correlations(float* signals, unsigned int n, int si
 	int block_grid_id = blockIdx.x;
 	int threadId = threadIdx.x;
 
-	for(int block_p = 0; block_p < (int)(n - window_size) / window_step; block_p+=((int)(n - window_size) / window_step))
+	for(int block_p = 0; block_p < (int)(n - window_size) / window_step; block_p+=50)
 	{
 		
 		if(block_grid_id < (int)(n - window_size) / window_step)
@@ -158,7 +158,7 @@ float* get_correlations_shift(float** signals, int signals_count, int n, int win
 	cudaMemcpy(gpu_actives, (void*)active_signals, active_count*sizeof(float), cudaMemcpyHostToDevice);
 	cudaMemcpy(device_data, (void*)splitted_by_windows, signals_count * window_size * window_count * sizeof(float), cudaMemcpyHostToDevice);
 
-    window_slide_correlations<<<window_count, active_count>>>(device_data, n, signals_count, window_size, window_step, device_result, gpu_actives, active_count, main_signal);
+    window_slide_correlations<<<50, active_count>>>(device_data, n, signals_count, window_size, window_step, device_result, gpu_actives, active_count, main_signal);
 
 	float* result = (float*)malloc(active_count * window_count * sizeof(float));
 
@@ -166,7 +166,22 @@ float* get_correlations_shift(float** signals, int signals_count, int n, int win
 
     return result;
 }
+void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss, std::string outputPath)
+{
 
+	std::string filename = outputPath + "\\" + std::to_string(shiftWidth) + " " + std::to_string(batchSize) + " " + prev_filename;
+
+	std::ofstream outFile(filename);
+	std::cout << filename << std::endl;
+	outFile << ss.rdbuf();
+
+	outFile.close();
+}
+
+inline float round3p(float x)
+{
+	return roundf(x * 10000) / 10000;
+} 
 
 void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
 	int mainSignal, std::vector<int>& actives)
@@ -174,6 +189,14 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 	int* activesArr = &actives[0];
 	
 	std::vector<float*> results_at_shift;
+
+
+	std::stringstream ss;
+	for (int i = 0; i < actives.size(); i++)
+	{
+		ss << "Active" << actives[i] << "\t\t";
+	}
+	ss << std::endl;
 
 	for(int i = 0; i < n; i+=shiftWidth)
 	{
@@ -183,17 +206,17 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 	for(auto result : results_at_shift)
 	{
 		int window_count = (int)(n - batchSize) / batchStep ;
-		std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n\n\n\n";
+
 		for(int i = 0; i < window_count; i++)
 		{
 			for(int j = 0; j < actives.size(); j++)
 			{
-				std::cout << result[i * actives.size() + j] << "\t";
+				ss << round3p(result[i * actives.size() + j]) << "\t\t";
 			}
-			std::cout << std::endl;
+			ss << std::endl;
 		}
 	}
-	// Writing to ss
+	write_file(shiftWidth, batchSize, prev_filename, ss, outputPath);
 	
 }
 
