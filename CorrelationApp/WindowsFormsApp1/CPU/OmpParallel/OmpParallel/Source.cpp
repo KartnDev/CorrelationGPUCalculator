@@ -1,4 +1,4 @@
-
+﻿
 #include <iostream>
 #include <time.h>
 #include <omp.h>
@@ -141,8 +141,14 @@ void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shi
 
 void circularShift(float* a, int size, int shift)
 {
-	assert(size >= shift);
-	std::rotate(a, a + size - shift, a + size);
+	if (shift > 0)
+	{
+		std::rotate(a, a + size - shift, a + size);
+	}
+	else
+	{
+		std::rotate(a, a - shift, a + size);
+	}
 }
 
 void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
@@ -155,8 +161,8 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 	}
 	ss << std::endl;
 
-	for (int i = 0; i < n; i += shiftWidth)
-	{	
+	for (int i = 0; i < n; i += abs(shiftWidth))
+	{
 		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, ss, mainSignal, actives, prev_filename, i);
 		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
 	}
@@ -219,6 +225,8 @@ float* cpgpu_correlation_spearmanr(float** signals, int n, int signal_count, int
 
 int main(int argc, char** argv)
 {
+
+	
 	if (argc < 8)
 	{
 		std::cerr << "Bad parameters... Argc: " << argc << std::endl;

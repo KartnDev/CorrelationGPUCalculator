@@ -109,10 +109,19 @@ __global__ void window_slide_correlations(float* signals, unsigned int n, int si
 	}
 }
 
+
 void circularShift(float* a, int size, int shift)
 {
-	assert(size >= shift);
-	std::rotate(a, a + size - shift, a + size);
+	if (shift > 0)
+	{
+		assert(size >= shift);
+		std::rotate(a, a + size - shift, a + size);
+	}
+	else
+	{
+		assert(size >= -shift);
+		std::rotate(a, a - shift, a + size);
+	}
 }
 
 
@@ -203,7 +212,7 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 	}
 	ss << std::endl;
 
-	for(int i = 0; i < n; i+=shiftWidth)
+	for(int i = 0; i < n; i+= abs(shiftWidth))
 	{
 		results_at_shift.push_back(get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal));
 		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);

@@ -83,7 +83,7 @@
             this.shiftBox.Name = "shiftBox";
             this.shiftBox.Size = new System.Drawing.Size(111, 20);
             this.shiftBox.TabIndex = 4;
-            this.shiftBox.Text = "20\r\n";
+            this.shiftBox.Text = "-20\r\n";
             // 
             // shiftLabel
             // 
@@ -109,7 +109,7 @@
             this.BatchSizeBox.Name = "BatchSizeBox";
             this.BatchSizeBox.Size = new System.Drawing.Size(111, 20);
             this.BatchSizeBox.TabIndex = 7;
-            this.BatchSizeBox.Text = "1000";
+            this.BatchSizeBox.Text = "25";
             // 
             // DeviceListBox
             // 
@@ -171,7 +171,7 @@
             this.batchStepBox.Name = "batchStepBox";
             this.batchStepBox.Size = new System.Drawing.Size(111, 20);
             this.batchStepBox.TabIndex = 13;
-            this.batchStepBox.Text = "100";
+            this.batchStepBox.Text = "5";
             // 
             // labelBatchStep
             // 

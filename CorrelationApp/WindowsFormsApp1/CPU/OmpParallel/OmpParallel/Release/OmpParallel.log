@@ -1,14 +1,14 @@
 ﻿  Source.cpp
 C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(50,14): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(127,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(152,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(187,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(205,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(277,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(295,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(158,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(193,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(211,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(285,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(303,20): warning C4018: '<': signed/unsigned mismatch
   Generating code
   2 of 397 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   OmpParallel.vcxproj -> C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\Release\OmpParallel.exe
