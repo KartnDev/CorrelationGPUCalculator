@@ -89,7 +89,7 @@ __global__ void window_slide_correlations(float* signals, unsigned int n, int si
 	int block_grid_id = blockIdx.x;
 	int threadId = threadIdx.x;
 
-	for(int block_p = 0; block_p < (int)(n - window_size) / window_step; block_p+=50)
+	for(int block_p = 0; block_p < (int)(n - window_size) / window_step; block_p+=((int)(n - window_size) / window_step))
 	{
 		
 		if(block_grid_id < (int)(n - window_size) / window_step)
@@ -158,7 +158,7 @@ float* get_correlations_shift(float** signals, int signals_count, int n, int win
 	cudaMemcpy(gpu_actives, (void*)active_signals, active_count*sizeof(float), cudaMemcpyHostToDevice);
 	cudaMemcpy(device_data, (void*)splitted_by_windows, signals_count * window_size * window_count * sizeof(float), cudaMemcpyHostToDevice);
 
-    window_slide_correlations<<<50, active_count>>>(device_data, n, signals_count, window_size, window_step, device_result, gpu_actives, active_count, main_signal);
+    window_slide_correlations<<<window_count, active_count>>>(device_data, n, signals_count, window_size, window_step, device_result, gpu_actives, active_count, main_signal);
 
 	float* result = (float*)malloc(active_count * window_count * sizeof(float));
 
