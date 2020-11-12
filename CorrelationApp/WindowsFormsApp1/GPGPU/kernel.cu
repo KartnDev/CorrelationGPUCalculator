@@ -173,62 +173,34 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 {
 	int* activesArr = &actives[0];
 	
+	std::vector<float*> results_at_shift;
 
-	float* result = get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal);
-
-	// Writing to ss
-	int window_count = (int)(n - batchSize) / batchStep ;
-	for(int i = 0; i < window_count; i++)
-    {
-		for(int j = 0; j < actives.size(); j++)
+	for(int i = 0; i < n; i+=shiftWidth)
+	{
+		results_at_shift.push_back(get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal));
+		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
+	}
+	for(auto result : results_at_shift)
+	{
+		int window_count = (int)(n - batchSize) / batchStep ;
+		std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n\n\n\n";
+		for(int i = 0; i < window_count; i++)
 		{
-			std::cout << result[i * actives.size() + j] << "\t";
+			for(int j = 0; j < actives.size(); j++)
+			{
+				std::cout << result[i * actives.size() + j] << "\t";
+			}
+			std::cout << std::endl;
 		}
-		std::cout << std::endl;
-    }
-
+	}
+	// Writing to ss
+	
 }
 
 
 
 int main(int argc, char** argv)
 {
-	// float** a = (float**)malloc(3 * sizeof(float*));
-	// pause_say("wait");
-
-	// int n_count = 20;
-	// int _sigs = 3;
-	// int win_size = 10;
-	// int win_step = 5;
-	// int window_count = (int)(n_count - win_size) / win_step;
-
-	// for(int i = 0; i < n_count; i++)
-	// {
-	// 	a[i] = (float*)malloc(n_count * sizeof(float));
-	// }
-	// for(int i = 0; i < n_count; i++)
-	// {
-	// 	a[0][i] = i;
-	// 	a[1][i] = -i;
-	// 	a[2][i] = (i+1) * (i+1);
-	// }
-	// pause_say("wait");
-	// float* wraped = wrap_singals_to_array_wnd(a, n_count, _sigs, win_size, win_step);
-	// pause_say("wait");
-	// for(int i = 0; i < _sigs; i++)
-	// {
-	// 	for(int j = 0; j < window_count; j++)
-	// 	{
-	// 		for(int k = 0; k < win_size; k++)
-	// 		{
-	// 			std::cout << wraped[i * (window_count * win_size) + j * win_size + k] << " ";
-	// 		}
-	// 		std::cout << " | ";
-	// 	}
-	// 	std::cout << "\n";
-	// }
-	// pause_say("wait");
-
 	if (argc < 8)
 	{
 		std::cerr << "Bad parameters... Argc: " << argc << std::endl;
