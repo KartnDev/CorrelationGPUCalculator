@@ -92,7 +92,7 @@
             this.shiftLabel.Name = "shiftLabel";
             this.shiftLabel.Size = new System.Drawing.Size(90, 19);
             this.shiftLabel.TabIndex = 5;
-            this.shiftLabel.Text = "Шаг сдвига:";
+            this.shiftLabel.Text = "Ширина сдвига:";
             // 
             // batchSizeLabel
             // 

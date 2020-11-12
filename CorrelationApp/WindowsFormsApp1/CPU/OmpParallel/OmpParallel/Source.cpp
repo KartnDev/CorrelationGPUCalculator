@@ -13,10 +13,10 @@
 #include <cmath>
 
 float* cpgpu_correlation_mat(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives);
-void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::stringstream& ss, int mainSignal, std::vector<int>& actives);
+void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep,
+	int mainSignal, std::vector<int>& actives, std::string filename, int currentShift, std::string outputPath);
 void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
 	int mainSignal, std::vector<int>& actives);
-void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss, std::string outputPath);
 float* cpgpu_correlation_spearmanr(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives);
 
 typedef std::vector<float> Vector;
@@ -101,11 +101,30 @@ inline float round3p(float x)
 {
 	return roundf(x * 10000) / 10000;
 }
-
-void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::stringstream& ss, int mainSignal, std::vector<int>& actives, std::string filename, int currentShift)
+void write_file(int curr_shift, int batchSize, int batchStep, std::string prev_filename, std::stringstream& ss, std::string outputPath)
 {
 
+	std::string filename = outputPath + "\\" + std::to_string(curr_shift) + " " + std::to_string(batchSize) + " " + std::to_string(batchStep) + " " + prev_filename;
 
+	std::ofstream outFile(filename);
+	std::cout << filename << std::endl;
+	outFile << ss.rdbuf();
+
+	outFile.close();
+}
+
+
+void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, 
+	int mainSignal, std::vector<int>& actives, std::string filename, int currentShift, std::string outputPath)
+{
+	std::stringstream ss;
+	for (int i = 0; i < actives.size(); i++)
+	{
+		ss << "Active" << actives[i] << "\t\t";
+	}
+	ss << std::endl;
+
+	
 	float** batch = (float**)malloc(signalCount * sizeof(float*));
 	for (int k = 0; k < signalCount; k++)
 	{
@@ -137,6 +156,8 @@ void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shi
 		free(batch[k]);
 	}
 	free(batch);
+
+	write_file(currentShift, batchSize, batchStep, filename, ss, outputPath);
 }
 
 void circularShift(float* a, int size, int shift)
@@ -154,34 +175,15 @@ void circularShift(float* a, int size, int shift)
 void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
 	int mainSignal, std::vector<int>& actives)
 {
-	std::stringstream ss;
-	for (int i = 0; i < actives.size(); i++)
-	{
-		ss << "Active" << actives[i] << "\t\t";
-	}
-	ss << std::endl;
-
+	
 	for (int i = 0; i < n; i += abs(shiftWidth))
 	{
-		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, ss, mainSignal, actives, prev_filename, i);
+		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, i, outputPath);
 		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
 	}
-
-	write_file(shiftWidth, batchSize, prev_filename, ss, outputPath);
-
 }
 
-void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss, std::string outputPath)
-{
 
-	std::string filename = outputPath + "\\" + std::to_string(shiftWidth) + " " + std::to_string(batchSize) + " " + prev_filename;
-
-	std::ofstream outFile(filename);
-	std::cout << filename << std::endl;
-	outFile << ss.rdbuf();
-
-	outFile.close();
-}
 
 
 

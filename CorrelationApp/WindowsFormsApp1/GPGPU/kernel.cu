@@ -180,10 +180,10 @@ float* get_correlations_shift(float** signals, int signals_count, int n, int win
 
     return result;
 }
-void write_file(int shiftWidth, int batchSize, std::string prev_filename, std::stringstream& ss, std::string outputPath)
+void write_file(int curr_shift, int batchSize, int batchStep, std::string prev_filename, std::stringstream& ss, std::string outputPath)
 {
 
-	std::string filename = outputPath + "\\" + std::to_string(shiftWidth) + " " + std::to_string(batchSize) + " " + prev_filename;
+	std::string filename = outputPath + "\\" + std::to_string(curr_shift) + " " + std::to_string(batchSize) + " " + std::to_string(batchStep) + " " + prev_filename;
 
 	std::ofstream outFile(filename);
 	std::cout << filename << std::endl;
@@ -201,37 +201,33 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 	int mainSignal, std::vector<int>& actives)
 {
 	int* activesArr = &actives[0];
-	
-	std::vector<float*> results_at_shift;
-
-
-	std::stringstream ss;
-	for (int i = 0; i < actives.size(); i++)
+	for(int curr = 0; curr < n; curr+= abs(shiftWidth))
 	{
-		ss << "Active" << actives[i] << "\t\t";
-	}
-	ss << std::endl;
+		std::stringstream ss;
+		for (int i = 0; i < actives.size(); i++)
+		{
+			ss << "Active" << actives[i] << "\t\t";
+		}
+		ss << std::endl;
 
-	for(int i = 0; i < n; i+= abs(shiftWidth))
-	{
-		results_at_shift.push_back(get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal));
+		
+		float * res = get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal);
 		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
-	}
-	for(auto result : results_at_shift)
-	{
+		
+
 		int window_count = (int)(n - batchSize) / batchStep ;
 
 		for(int i = 0; i < window_count; i++)
 		{
 			for(int j = 0; j < actives.size(); j++)
 			{
-				ss << round3p(result[i * actives.size() + j]) << "\t\t";
+				ss << round3p(res[i * actives.size() + j]) << "\t\t";
 			}
 			ss << std::endl;
 		}
+		
+		write_file(curr, batchSize, batchStep, prev_filename, ss, outputPath);
 	}
-	write_file(shiftWidth, batchSize, prev_filename, ss, outputPath);
-	
 }
 
 
