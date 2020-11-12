@@ -13,20 +13,6 @@
 #include <windows.h>
 #include <algorithm>
 
-void pause_say(const char* msg)
-{
-	std::cout << msg << std::endl;
-	system("pause");
-}
-
-__device__ void print_array(float* array, int n)
-{
-	for(int i =0; i< n; i++)
-	{
-		printf("%i\t", array[i]);
-	}
-	printf("\n");
-}
 
 __device__ void rankify(float* X, int n, float* res)
 {
@@ -103,13 +89,24 @@ __global__ void window_slide_correlations(float* signals, unsigned int n, int si
 	int block_grid_id = blockIdx.x;
 	int threadId = threadIdx.x;
 
-	float* curr_x = current_signal_wnd(signals, sig_count, n, window_size, window_step, block_grid_id, main_signal);
-	float* curr_y = current_signal_wnd(signals, sig_count, n, window_size, window_step, block_grid_id, threadId);
-
-	result[block_grid_id * active_count + threadId] = full_correlate(curr_x, curr_y, window_size);
-
-	free(curr_x);
-	free(curr_y);
+	for(int block_p = 0; block_p < (int)(n - window_size) / window_step; block_p+=50)
+	{
+		
+		if(block_grid_id < (int)(n - window_size) / window_step)
+		{
+			
+		
+			float* curr_x = current_signal_wnd(signals, sig_count, n, window_size, window_step, block_grid_id, main_signal);
+			float* curr_y = current_signal_wnd(signals, sig_count, n, window_size, window_step, block_grid_id, threadId);
+		
+			
+			result[(block_grid_id + block_p) * active_count + threadId] = full_correlate(curr_x, curr_y, window_size);
+		
+			free(curr_x);
+			free(curr_y);
+		}
+		
+	}
 }
 
 void circularShift(float* a, int size, int shift)
@@ -161,7 +158,7 @@ float* get_correlations_shift(float** signals, int signals_count, int n, int win
 	cudaMemcpy(gpu_actives, (void*)active_signals, active_count*sizeof(float), cudaMemcpyHostToDevice);
 	cudaMemcpy(device_data, (void*)splitted_by_windows, signals_count * window_size * window_count * sizeof(float), cudaMemcpyHostToDevice);
 
-    window_slide_correlations<<<window_count, active_count>>>(device_data, n, signals_count, window_size, window_step, device_result, gpu_actives, active_count, main_signal);
+    window_slide_correlations<<<50, active_count>>>(device_data, n, signals_count, window_size, window_step, device_result, gpu_actives, active_count, main_signal);
 
 	float* result = (float*)malloc(active_count * window_count * sizeof(float));
 
