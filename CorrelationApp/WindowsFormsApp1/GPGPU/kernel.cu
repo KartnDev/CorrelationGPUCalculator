@@ -97,7 +97,7 @@ __global__ void window_slide_correlations(float* signals, unsigned int n, int si
 			
 		
 			float* curr_x = current_signal_wnd(signals, sig_count, n, window_size, window_step, block_grid_id, main_signal);
-			float* curr_y = current_signal_wnd(signals, sig_count, n, window_size, window_step, block_grid_id, threadId);
+			float* curr_y = current_signal_wnd(signals, sig_count, n, window_size, window_step, block_grid_id, active_signals[threadId]);
 		
 			
 			result[(block_grid_id + block_p) * active_count + threadId] = full_correlate(curr_x, curr_y, window_size);
@@ -163,6 +163,11 @@ float* get_correlations_shift(float** signals, int signals_count, int n, int win
 	float* result = (float*)malloc(active_count * window_count * sizeof(float));
 
     cudaMemcpy(result, device_result, active_count * window_count*sizeof(float), cudaMemcpyDeviceToHost);
+
+	free(splitted_by_windows);
+	cudaFree((void**)&device_result);
+	cudaFree((void**)&device_data);
+	cudaFree((void**)&gpu_actives);
 
     return result;
 }

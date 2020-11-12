@@ -157,9 +157,8 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 
 	for (int i = 0; i < n; i += shiftWidth)
 	{	
-		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);	
-
 		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, ss, mainSignal, actives, prev_filename, i);
+		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
 	}
 
 	write_file(shiftWidth, batchSize, prev_filename, ss, outputPath);
