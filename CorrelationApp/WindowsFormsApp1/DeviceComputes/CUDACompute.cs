@@ -16,7 +16,7 @@ namespace WindowsFormsApp1.DeviceComputes
     public class CUDACompute: ResultWrapper, IComputeDevice
     {
 
-        public void ShiftCompute(List<double[]> fullSignals, int shiftWidth, int batchSize, int batchStep, int mainSignal, List<int> actives)
+        public void ShiftCompute(List<double[]> fullSignals, int shiftWidth, int shiftLeft, int shiftRight, int batchSize, int batchStep, int mainSignal, List<int> actives)
         {
             string activesStr = "";
             foreach (var item in actives)

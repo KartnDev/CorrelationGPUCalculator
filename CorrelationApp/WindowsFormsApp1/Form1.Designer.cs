@@ -43,6 +43,10 @@
             this.buttonLoadDir = new System.Windows.Forms.Button();
             this.batchStepBox = new System.Windows.Forms.TextBox();
             this.labelBatchStep = new System.Windows.Forms.Label();
+            this.rightShiftBox = new System.Windows.Forms.TextBox();
+            this.leftShiftLabel = new System.Windows.Forms.Label();
+            this.leftShiftBox = new System.Windows.Forms.TextBox();
+            this.rightShiftLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize) (this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,7 +87,7 @@
             this.shiftBox.Name = "shiftBox";
             this.shiftBox.Size = new System.Drawing.Size(111, 20);
             this.shiftBox.TabIndex = 4;
-            this.shiftBox.Text = "-20\r\n";
+            this.shiftBox.Text = "20\r\n";
             // 
             // shiftLabel
             // 
@@ -97,7 +101,7 @@
             // batchSizeLabel
             // 
             this.batchSizeLabel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.batchSizeLabel.Location = new System.Drawing.Point(12, 220);
+            this.batchSizeLabel.Location = new System.Drawing.Point(12, 246);
             this.batchSizeLabel.Name = "batchSizeLabel";
             this.batchSizeLabel.Size = new System.Drawing.Size(90, 23);
             this.batchSizeLabel.TabIndex = 6;
@@ -105,7 +109,7 @@
             // 
             // BatchSizeBox
             // 
-            this.BatchSizeBox.Location = new System.Drawing.Point(12, 236);
+            this.BatchSizeBox.Location = new System.Drawing.Point(12, 262);
             this.BatchSizeBox.Name = "BatchSizeBox";
             this.BatchSizeBox.Size = new System.Drawing.Size(111, 20);
             this.BatchSizeBox.TabIndex = 7;
@@ -167,7 +171,7 @@
             // 
             // batchStepBox
             // 
-            this.batchStepBox.Location = new System.Drawing.Point(12, 281);
+            this.batchStepBox.Location = new System.Drawing.Point(12, 307);
             this.batchStepBox.Name = "batchStepBox";
             this.batchStepBox.Size = new System.Drawing.Size(111, 20);
             this.batchStepBox.TabIndex = 13;
@@ -176,17 +180,55 @@
             // labelBatchStep
             // 
             this.labelBatchStep.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.labelBatchStep.Location = new System.Drawing.Point(13, 264);
+            this.labelBatchStep.Location = new System.Drawing.Point(13, 290);
             this.labelBatchStep.Name = "labelBatchStep";
             this.labelBatchStep.Size = new System.Drawing.Size(90, 23);
             this.labelBatchStep.TabIndex = 12;
             this.labelBatchStep.Text = "Шаг окна: ";
+            // 
+            // rightShiftBox
+            // 
+            this.rightShiftBox.Location = new System.Drawing.Point(59, 214);
+            this.rightShiftBox.Name = "rightShiftBox";
+            this.rightShiftBox.Size = new System.Drawing.Size(65, 20);
+            this.rightShiftBox.TabIndex = 14;
+            this.rightShiftBox.Text = "5";
+            // 
+            // leftShiftLabel
+            // 
+            this.leftShiftLabel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.leftShiftLabel.Location = new System.Drawing.Point(12, 191);
+            this.leftShiftLabel.Name = "leftShiftLabel";
+            this.leftShiftLabel.Size = new System.Drawing.Size(41, 19);
+            this.leftShiftLabel.TabIndex = 17;
+            this.leftShiftLabel.Text = "Вверх";
+            // 
+            // leftShiftBox
+            // 
+            this.leftShiftBox.Location = new System.Drawing.Point(59, 188);
+            this.leftShiftBox.Name = "leftShiftBox";
+            this.leftShiftBox.Size = new System.Drawing.Size(64, 20);
+            this.leftShiftBox.TabIndex = 16;
+            this.leftShiftBox.Text = "5";
+            // 
+            // rightShiftLabel
+            // 
+            this.rightShiftLabel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.rightShiftLabel.Location = new System.Drawing.Point(12, 214);
+            this.rightShiftLabel.Name = "rightShiftLabel";
+            this.rightShiftLabel.Size = new System.Drawing.Size(41, 19);
+            this.rightShiftLabel.TabIndex = 18;
+            this.rightShiftLabel.Text = "Вниз";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.rightShiftLabel);
+            this.Controls.Add(this.leftShiftLabel);
+            this.Controls.Add(this.leftShiftBox);
+            this.Controls.Add(this.rightShiftBox);
             this.Controls.Add(this.batchStepBox);
             this.Controls.Add(this.labelBatchStep);
             this.Controls.Add(this.buttonLoadDir);
@@ -206,6 +248,13 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.TextBox rightShiftBox;
+
+        private System.Windows.Forms.TextBox leftShiftBox;
+
+        private System.Windows.Forms.Label leftShiftLabel;
+        private System.Windows.Forms.Label rightShiftLabel;
 
         private System.Windows.Forms.TextBox batchStepBox;
         private System.Windows.Forms.Label labelBatchStep;

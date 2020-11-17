@@ -24,8 +24,23 @@
   <component name="ChangeListManager">
     <list default="true" id="b492883a-46f0-4598-8252-a4da2b8ab59d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/Browse.VC.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.log" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/OmpParallel.write.1u.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/OmpParallel.write.1u.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/link.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/link.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/Source.obj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/Source.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/vc142.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/vc142.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Source.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Source.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.iobj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.iobj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.ipdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.ipdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CppCPUCompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CppCPUCompute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/WindowsFormsApp1.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/ReleaseFast/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/ReleaseFast/WindowsFormsApp1.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.exe" afterDir="false" />
@@ -39,51 +54,51 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/4b/4750dd4c/_ThreadPoolWaitCallback.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/e5/c8aa911e/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/a1/2928607d/FileDialog.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/14/dcad1ade/Button.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/43/ff7d03b9/DataGridViewCellCollection.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/f5/11b4ded5/RuntimeMethodInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/51/45ca46eb/CUDA.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/0d/0be8e361/Parallel.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/a1/28d5a221/Directory.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/d9/a501dbc2/Device.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/c5/ef7b8e4d/Task.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/de/544df211/List`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/f9/d2c2bf45/_ThreadPoolWaitCallback.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/66/0bf679a1/StreamWriter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/f5/11b4ded5/RuntimeMethodInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/d2/29b298b7/ThreadPoolWorkQueue.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/af/8e320b19/DataGridViewRowCollection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/f2/1a25e480/ExecutionContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/5a/352379e7/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/eb/87e3ce97/Task.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/43/ff7d03b9/DataGridViewCellCollection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/51/45ca46eb/CUDA.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/c6/b1b1774b/Parallel.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5DE66FF1-1FCB-4513-8463-255B392B032B/84/fca9c706/Queue`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/d9/a501dbc2/Device.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/03/504c0c85/Interlocked.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/5d/23e92359/DataGridView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/f8/97873eab/ParallelOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/c6/4a2082e0/GPGPU.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/a1/28d5a221/Directory.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/11/86cad0da/RandomExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/0d/0be8e361/Parallel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/de/b7f21611/ComboBox.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/a5/5612b8e1/Random.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/14/dcad1ade/Button.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/60/10ccb856/ePlatform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5DE66FF1-1FCB-4513-8463-255B392B032B/11/cf8f978c/Process.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/77/c0e8e278/Number.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/b3/b89bbcda/MTAThreadAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5359CB8D-B5E0-4565-8CCE-390E47AF0E93/14/d907f279/ManagementException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/37/b5f7e888/eArchitecture.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/45/6585cb0e/Control.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/68/9fcfee8e/CompileProperties.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/d4/95778607/NativeWindow.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/d2/29b298b7/ThreadPoolWorkQueue.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/37/b5f7e888/eArchitecture.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/77/c0e8e278/Number.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/d0/2b796fd4/ButtonBase.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/f2/1a25e480/ExecutionContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5DE66FF1-1FCB-4513-8463-255B392B032B/84/fca9c706/Queue`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/60/10ccb856/ePlatform.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/45/6585cb0e/Control.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/eb/87e3ce97/Task.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/D6D3AC03-BF86-4882-89C2-EBF3A45CE0A1/c6/b1b1774b/Parallel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/de/b7f21611/ComboBox.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5DE66FF1-1FCB-4513-8463-255B392B032B/11/cf8f978c/Process.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/e3/105ab9b8/Application.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/03/504c0c85/Interlocked.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/f8/97873eab/ParallelOptions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/4b/4750dd4c/_ThreadPoolWaitCallback.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/c9/c915f323/CudafyTranslator.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/11/86cad0da/RandomExtensions.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/6c/07ca3d72/Sorting.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/b7/37278464/ThreadPoolWorkQueue.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/5d/23e92359/DataGridView.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/9d/d17c31a9/Correlation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/7e/cd61956c/CompilerHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/a5/5612b8e1/Random.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/e5/c8aa911e/ExecutionContext.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/af/8e320b19/DataGridViewRowCollection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/d0/2b796fd4/ButtonBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/c9/c915f323/CudafyTranslator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/9d/d17c31a9/Correlation.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/66/0bf679a1/StreamWriter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/61/17546820/ArrayStatistics.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/c6/4a2082e0/GPGPU.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/b3/b89bbcda/MTAThreadAttribute.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/de/544df211/List`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5359CB8D-B5E0-4565-8CCE-390E47AF0E93/14/d907f279/ManagementException.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/5a/352379e7/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4635C13D-13D8-4225-9C40-32BC5D39F127/6c/07ca3d72/Sorting.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/c5/ef7b8e4d/Task.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/b7/37278464/ThreadPoolWorkQueue.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -98,8 +113,8 @@
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/ResultWrapper.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Form1.Designer.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/OpenBLASCompute.cs" />
-        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" />
+        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CppCPUCompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" />
@@ -172,7 +187,8 @@
       <workItem from="1605000195770" duration="5939000" />
       <workItem from="1605095626593" duration="2612000" />
       <workItem from="1605168081577" duration="3788000" />
-      <workItem from="1605185678083" duration="1780000" />
+      <workItem from="1605185678083" duration="3980000" />
+      <workItem from="1605616288356" duration="691000" />
     </task>
     <servers />
   </component>
@@ -209,22 +225,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="150" y="104" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604397520542" />
-    <state width="1860" height="223" key="GridCell.Tab.0.bottom" timestamp="1605186842191">
+    <state width="1860" height="223" key="GridCell.Tab.0.bottom" timestamp="1605191823698">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="223" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605186842191" />
-    <state width="1860" height="223" key="GridCell.Tab.0.center" timestamp="1605186842191">
+    <state width="1860" height="223" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605191823698" />
+    <state width="1860" height="223" key="GridCell.Tab.0.center" timestamp="1605191823698">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="223" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605186842191" />
-    <state width="1860" height="223" key="GridCell.Tab.0.left" timestamp="1605186842191">
+    <state width="1860" height="223" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605191823698" />
+    <state width="1860" height="223" key="GridCell.Tab.0.left" timestamp="1605191823698">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="223" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605186842191" />
-    <state width="1860" height="223" key="GridCell.Tab.0.right" timestamp="1605186842191">
+    <state width="1860" height="223" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605191823698" />
+    <state width="1860" height="223" key="GridCell.Tab.0.right" timestamp="1605191823698">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="223" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605186842191" />
+    <state width="1860" height="223" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605191823698" />
     <state width="1860" height="367" key="GridCell.Tab.1.bottom" timestamp="1604586380460">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

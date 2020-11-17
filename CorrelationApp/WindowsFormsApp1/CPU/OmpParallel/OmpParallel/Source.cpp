@@ -12,14 +12,17 @@
 #include <algorithm>
 #include <cmath>
 
+#define float double
+
 float* cpgpu_correlation_mat(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives);
 void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep,
 	int mainSignal, std::vector<int>& actives, std::string filename, int currentShift, std::string outputPath);
-void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
-	int mainSignal, std::vector<int>& actives);
+
 float* cpgpu_correlation_spearmanr(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives);
 
 typedef std::vector<float> Vector;
+
+
 
 
 void rankify_parallel(float* X, int n, float* res) {
@@ -97,9 +100,9 @@ float correlation(float* x, float* y, int n)
 }
 
 
-inline float round3p(float x)
+inline float round6p(float x)
 {
-	return roundf(x * 10000) / 10000;
+	return roundf(x * 1000000) / 1000000;
 }
 void write_file(int curr_shift, int batchSize, int batchStep, std::string prev_filename, std::stringstream& ss, std::string outputPath)
 {
@@ -120,7 +123,7 @@ void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shi
 	std::stringstream ss;
 	for (int i = 0; i < actives.size(); i++)
 	{
-		ss << "Active" << actives[i] << "\t\t";
+		ss << "Active  " << actives[i] << "\t\t";
 	}
 	ss << std::endl;
 
@@ -132,7 +135,7 @@ void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shi
 	}
 
 
-	for (int batchIndex = 0; batchIndex < (n - batchSize); batchIndex += batchStep)
+	for (int batchIndex = 0; batchIndex < (n - batchSize) + 1; batchIndex += batchStep)
 	{
 		for (int k = 0; k < signalCount; k++)
 		{
@@ -143,9 +146,24 @@ void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shi
 		}
 
 		float* result = cpgpu_correlation_spearmanr(batch, batchSize, signalCount, mainSignal, actives);
+
+		std::string temp = "";
+		
 		for (int j = 0; j < actives.size(); j++)
 		{
-			ss << round3p(result[j]) << "\t\t";
+			temp = "";
+			temp += std::to_string( round6p(result[j]));
+
+			if(temp.size() > 9)
+			{
+				for(int i =0; i < 9 - temp.size(); i++)
+				{
+					temp += " ";
+				}
+			}
+
+			
+			ss << temp << "\t\t";
 		}
 		ss << std::endl;
 		free(result);
@@ -172,14 +190,28 @@ void circularShift(float* a, int size, int shift)
 	}
 }
 
-void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
+void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int leftShift, int rightShift, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
 	int mainSignal, std::vector<int>& actives)
 {
+	//Zero_Shift
+	SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, 0, outputPath);
 	
-	for (int i = 0; i < n; i += abs(shiftWidth))
+	
+	for (int i = 1; i < leftShift + 1; i ++)
 	{
-		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, i, outputPath);
+		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, -i, outputPath);
+		circularShift(currentShiftSignals[mainSignal], n, -shiftWidth);
+	}
+	// Normalize 
+	for (int i = 1; i < leftShift + 1; i++)
+	{
 		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
+	}
+	// Normalize 
+	for (int i = 1; i < rightShift + 1; i ++)
+	{
+		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
+		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, i, outputPath);
 	}
 }
 
@@ -227,8 +259,6 @@ float* cpgpu_correlation_spearmanr(float** signals, int n, int signal_count, int
 
 int main(int argc, char** argv)
 {
-
-	
 	if (argc < 8)
 	{
 		std::cerr << "Bad parameters... Argc: " << argc << std::endl;
@@ -240,10 +270,10 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
-	int mainSignal = std::stoi(argv[7]);
+	int mainSignal = std::stoi(argv[9]);
 	std::vector<int> actives;
 
-	for (int i = 8; i < argc; i++)
+	for (int i = 10; i < argc; i++)
 	{
 		actives.push_back(std::stoi(argv[i]));
 	}
@@ -295,7 +325,7 @@ int main(int argc, char** argv)
 	std::cout << "Start Computing..." << std::endl;
 	auto start = std::chrono::high_resolution_clock::now();
 	
-	ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]), std::stoi(argv[3]), std::stoi(argv[4]), argv[5],  argv[6], mainSignal, actives);
+	ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]), std::stoi(argv[3]), std::stoi(argv[4]), std::stoi(argv[5]), std::stoi(argv[6]), argv[7],  argv[8], mainSignal, actives);
 	
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);

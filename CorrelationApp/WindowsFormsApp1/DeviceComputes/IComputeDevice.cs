@@ -6,6 +6,8 @@ namespace WindowsFormsApp1.DeviceComputes
     {
         void ShiftCompute(List<double[]> fullSignals, 
             int shiftWidth, 
+            int shiftLeft,
+            int shiftRight,
             int batchSize, 
             int batchStep,
             int mainSignal,
