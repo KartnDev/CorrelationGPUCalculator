@@ -14,6 +14,8 @@
 #include <algorithm>
 
 
+
+
 __device__ void rankify(float* X, int n, float* res)
 {
     for (int i = 0; i < n; i++)
@@ -110,21 +112,6 @@ __global__ void window_slide_correlations(float* signals, unsigned int n, int si
 }
 
 
-void circularShift(float* a, int size, int shift)
-{
-	if (shift > 0)
-	{
-		assert(size >= shift);
-		std::rotate(a, a + size - shift, a + size);
-	}
-	else
-	{
-		assert(size >= -shift);
-		std::rotate(a, a - shift, a + size);
-	}
-}
-
-
 float* wrap_singals_to_array_wnd(float** signals, int n, int signal_count, int window_size, int window_step)
 {
     int window_count = (int)(n - window_size) / window_step;
@@ -148,7 +135,7 @@ float* wrap_singals_to_array_wnd(float** signals, int n, int signal_count, int w
 }
 
 
-float* get_correlations_shift(float** signals, int signals_count, int n, int window_size, int window_step, int* active_signals, unsigned int active_count, int main_signal)
+float* get_correlations_shift(float** signals, int n, int signals_count, int window_size, int window_step, int* active_signals, unsigned int active_count, int main_signal)
 {
 	int window_count = (int)(n - window_size) / window_step;
 
@@ -180,6 +167,10 @@ float* get_correlations_shift(float** signals, int signals_count, int n, int win
 
     return result;
 }
+inline float round6p(float x)
+{
+	return roundf(x * 1000000) / 1000000;
+}
 void write_file(int curr_shift, int batchSize, int batchStep, std::string prev_filename, std::stringstream& ss, std::string outputPath)
 {
 
@@ -191,42 +182,109 @@ void write_file(int curr_shift, int batchSize, int batchStep, std::string prev_f
 
 	outFile.close();
 }
-
-inline float round3p(float x)
+void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, 
+	int mainSignal, std::vector<int>& actives, std::string filename, int currentShift, std::string outputPath)
 {
-	return roundf(x * 10000) / 10000;
-} 
-
-void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
-	int mainSignal, std::vector<int>& actives)
-{
-	int* activesArr = &actives[0];
-	for(int curr = 0; curr < n; curr+= abs(shiftWidth))
+	std::stringstream ss;
+	for (int i = 0; i < actives.size(); i++)
 	{
-		std::stringstream ss;
-		for (int i = 0; i < actives.size(); i++)
+		ss << "Active  " << actives[i] << "\t\t";
+	}
+	ss << std::endl;
+
+	
+	float** batch = (float**)malloc(signalCount * sizeof(float*));
+	for (int k = 0; k < signalCount; k++)
+	{
+		batch[k] = (float*)malloc(batchSize * sizeof(float));
+	}
+
+
+	for (int batchIndex = 0; batchIndex < (n - batchSize) + 1; batchIndex += batchStep)
+	{
+		for (int k = 0; k < signalCount; k++)
 		{
-			ss << "Active" << actives[i] << "\t\t";
+			for (int j = 0; j < batchSize; j++)
+			{
+				batch[k][j] = currentShiftSignals[k][j + batchIndex];
+			}
+		}
+
+		float* result = get_correlations_shift(batch, batchSize, signalCount, batchSize, batchStep, &actives[0], actives.size(), mainSignal);
+
+		std::string temp = "";
+		
+		for (int j = 0; j < actives.size(); j++)
+		{
+			temp = "";
+			temp += std::to_string( round6p(result[j]));
+
+			if(temp.size() > 9)
+			{
+				for(int i =0; i < 9 - temp.size(); i++)
+				{
+					temp += " ";
+				}
+			}
+
+			
+			ss << temp << "\t\t";
 		}
 		ss << std::endl;
+		free(result);
+	}
+	//freeing
+	for (int k = 0; k < signalCount; k++)
+	{
+		free(batch[k]);
+	}
+	free(batch);
 
-		
-		float * res = get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal);
+	write_file(currentShift, batchSize, batchStep, filename, ss, outputPath);
+}
+
+
+
+
+
+
+
+
+void circularShift(float* a, int size, int shift)
+{
+	if (shift > 0)
+	{
+		std::rotate(a, a + size - shift, a + size);
+	}
+	else
+	{
+		std::rotate(a, a - shift, a + size);
+	}
+}
+
+void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int leftShift, int rightShift, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
+	int mainSignal, std::vector<int>& actives)
+{
+
+	//Zero_Shift
+	SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, 0, outputPath);
+	
+	
+	for (int i = 1; i < leftShift + 1; i ++)
+	{
+		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, -i, outputPath);
+		circularShift(currentShiftSignals[mainSignal], n, -shiftWidth);
+	}
+	// Normalize 
+	for (int i = 1; i < leftShift + 1; i++)
+	{
 		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
-		
-
-		int window_count = (int)(n - batchSize) / batchStep ;
-
-		for(int i = 0; i < window_count; i++)
-		{
-			for(int j = 0; j < actives.size(); j++)
-			{
-				ss << round3p(res[i * actives.size() + j]) << "\t\t";
-			}
-			ss << std::endl;
-		}
-		
-		write_file(curr, batchSize, batchStep, prev_filename, ss, outputPath);
+	}
+	// Normalize 
+	for (int i = 1; i < rightShift + 1; i ++)
+	{
+		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
+		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, i, outputPath);
 	}
 }
 
@@ -245,10 +303,10 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
-	int mainSignal = std::stoi(argv[7]);
+	int mainSignal = std::stoi(argv[9]);
 	std::vector<int> actives;
 
-	for (int i = 8; i < argc; i++)
+	for (int i = 10; i < argc; i++)
 	{
 		actives.push_back(std::stoi(argv[i]));
 	}
@@ -299,8 +357,8 @@ int main(int argc, char** argv)
 
 	std::cout << "Start Computing..." << std::endl;
 	auto start = std::chrono::high_resolution_clock::now();
-	
-	ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]), std::stoi(argv[3]), std::stoi(argv[4]), argv[5],  argv[6], mainSignal, actives);
+
+	ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]), std::stoi(argv[3]), std::stoi(argv[4]), std::stoi(argv[5]), std::stoi(argv[6]), argv[7],  argv[8], mainSignal, actives);
 	
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
@@ -312,5 +370,5 @@ int main(int argc, char** argv)
 		free(h_x[i]);
 	}
 	free(h_x);
-	system("pause");
+
 }

@@ -25,7 +25,7 @@ namespace WindowsFormsApp1.DeviceComputes
             }
 
             string filename = @"C:\Users\Dmitry\Documents\GitHub\CorrelationApp\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\GPGPU\a.exe";
-            string @params = $"{pathNamePath} {shiftWidth} {batchSize} {batchStep} {prevName} {outputFolder} {mainSignal}{activesStr}";
+            string @params = $"{pathNamePath} {shiftWidth} {shiftLeft} {shiftRight} {batchSize} {batchStep} {prevName} {outputFolder} {mainSignal}{activesStr}";
 
             var proc = System.Diagnostics.Process.Start(filename,@params);
         }

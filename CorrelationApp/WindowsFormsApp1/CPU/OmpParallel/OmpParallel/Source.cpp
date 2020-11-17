@@ -20,8 +20,6 @@ void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shi
 
 float* cpgpu_correlation_spearmanr(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives);
 
-typedef std::vector<float> Vector;
-
 
 
 

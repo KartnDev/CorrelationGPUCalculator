@@ -24,25 +24,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b492883a-46f0-4598-8252-a4da2b8ab59d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/.suo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/Browse.VC.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.log" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/OmpParallel.write.1u.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/OmpParallel.write.1u.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/link.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/link.read.1.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/Source.obj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/Source.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/vc142.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/vc142.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Source.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Source.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.iobj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.iobj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.ipdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.ipdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CppCPUCompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CppCPUCompute.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/kernel.cu" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/kernel.cu" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/ReleaseFast/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/ReleaseFast/WindowsFormsApp1.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/ReleaseFast/WindowsFormsApp1.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,9 +101,9 @@
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/OpenBLASCompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" />
-        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CppCPUCompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" />
+        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" />
       </list>
     </option>
   </component>
@@ -188,7 +174,7 @@
       <workItem from="1605095626593" duration="2612000" />
       <workItem from="1605168081577" duration="3788000" />
       <workItem from="1605185678083" duration="3980000" />
-      <workItem from="1605616288356" duration="691000" />
+      <workItem from="1605616288356" duration="2606000" />
     </task>
     <servers />
   </component>
@@ -225,22 +211,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="150" y="104" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604397520542" />
-    <state width="1860" height="223" key="GridCell.Tab.0.bottom" timestamp="1605191823698">
+    <state width="1877" height="223" key="GridCell.Tab.0.bottom" timestamp="1605623565010">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="223" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605191823698" />
-    <state width="1860" height="223" key="GridCell.Tab.0.center" timestamp="1605191823698">
+    <state width="1877" height="223" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605623565010" />
+    <state width="1877" height="223" key="GridCell.Tab.0.center" timestamp="1605623565010">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="223" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605191823698" />
-    <state width="1860" height="223" key="GridCell.Tab.0.left" timestamp="1605191823698">
+    <state width="1877" height="223" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605623565010" />
+    <state width="1877" height="223" key="GridCell.Tab.0.left" timestamp="1605623565010">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="223" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605191823698" />
-    <state width="1860" height="223" key="GridCell.Tab.0.right" timestamp="1605191823698">
+    <state width="1877" height="223" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605623565010" />
+    <state width="1877" height="223" key="GridCell.Tab.0.right" timestamp="1605623565010">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1860" height="223" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605191823698" />
+    <state width="1877" height="223" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605623565010" />
     <state width="1860" height="367" key="GridCell.Tab.1.bottom" timestamp="1604586380460">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
