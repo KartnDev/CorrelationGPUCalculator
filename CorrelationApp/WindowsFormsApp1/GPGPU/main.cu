@@ -13,6 +13,7 @@
 #include <windows.h>
 #include <algorithm>
 
+#define float double
 
 __device__ void rankify(float* X, int n, float* res)
 {
@@ -192,100 +193,84 @@ void write_file(int curr_shift, int batchSize, int batchStep, std::string prev_f
 	outFile.close();
 }
 
-inline float round3p(float x)
+inline float round6p(float x)
 {
-	return roundf(x * 10000) / 10000;
+	return roundf(x * 1000000) / 1000000;
 } 
 
-void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int leftShift, int rightShift, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
-	int mainSignal, std::vector<int>& actives)
+void ShiftComputeAtCurr(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
+	int mainSignal, std::vector<int>& actives, int curr)
 {
 	int* activesArr = &actives[0];
-	for(int curr = 0; curr < 1; curr ++)
+
+	
+	std::stringstream ss;
+	for (int i = 0; i < actives.size(); i++)
 	{
-		std::stringstream ss;
-		for (int i = 0; i < actives.size(); i++)
+		ss << "Active  " << actives[i] << "\t\t";
+	}
+	ss << std::endl;
+
+	
+	float * res = get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal);
+	circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
+	
+
+	int window_count = (int)(n - batchSize) / batchStep;
+	std::string temp = "";
+	for(int i = 0; i < window_count; i++)
+	{
+		
+		for(int j = 0; j < actives.size(); j++)
 		{
-			ss << "Active" << actives[i] << "\t\t";
+			temp += std::to_string( round6p(res[signalCount * i + j]));
+
+			if(temp.size() > 9)
+			{
+				for(int i =0; i < 9 - temp.size(); i++)
+				{
+					temp += " ";
+				}
+			}
+
+			
+			ss << temp << "\t\t";
+			temp = "";
 		}
-		ss << std::endl;
+
 
 		
-		float * res = get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal);
+		ss << std::endl;
+	}
+	
+	write_file(curr, batchSize, batchStep, prev_filename, ss, outputPath);
+    ss.str("");
+
+	
+}
+void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int leftShift, int rightShift, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
+	int mainSignal, std::vector<int>& active)
+{
+	//Zero Shift
+	ShiftComputeAtCurr(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, prev_filename, outputPath, mainSignal, active, 0);
+
+	//left Shift
+	for(int i = 1; i < leftShift + 1; i++)
+	{
+		ShiftComputeAtCurr(currentShiftSignals, n, signalCount, -shiftWidth, batchSize, batchStep, prev_filename, outputPath, mainSignal, active, -i);
+	}
+	// Zeroing the shift
+	for(int i = 1; i < leftShift + 1; i++)
+	{
 		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
-		
+	}
 
-		int window_count = (int)(n - batchSize) / batchStep ;
-
-		for(int i = 0; i < window_count; i++)
-		{
-			for(int j = 0; j < actives.size(); j++)
-			{
-				ss << round3p(res[i * actives.size() + j]) << "\t\t";
-			}
-			ss << std::endl;
-		}
-		
-		write_file(curr, batchSize, batchStep, prev_filename, ss, outputPath);
-    }
-
-    for(int curr = 0; curr < leftShift + 1; curr++)
+	//Right Shift
+	for(int i = 1; i < leftShift + 1; i++)
 	{
-		std::stringstream ss;
-		for (int i = 0; i < actives.size(); i++)
-		{
-			ss << "Active" << actives[i] << "\t\t";
-		}
-		ss << std::endl;
-
-		
-		float * res = get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal);
-		circularShift(currentShiftSignals[mainSignal], n, -shiftWidth);
-		
-
-		int window_count = (int)(n - batchSize) / batchStep ;
-
-		for(int i = 0; i < window_count; i++)
-		{
-			for(int j = 0; j < actives.size(); j++)
-			{
-				ss << round3p(res[i * actives.size() + j]) << "\t\t";
-			}
-			ss << std::endl;
-		}
-		
-		write_file(-curr, batchSize, batchStep, prev_filename, ss, outputPath);
-    }
-    for(int curr = 0; curr < rightShift + 1; curr++)
-	{
-		std::stringstream ss;
-		for (int i = 0; i < actives.size(); i++)
-		{
-			ss << "Active" << actives[i] << "\t\t";
-		}
-		ss << std::endl;
-
-		
-		float * res = get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal);
-		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
-		
-
-		int window_count = (int)(n - batchSize) / batchStep ;
-
-		for(int i = 0; i < window_count; i++)
-		{
-			for(int j = 0; j < actives.size(); j++)
-			{
-				ss << round3p(res[i * actives.size() + j]) << "\t\t";
-			}
-			ss << std::endl;
-		}
-		
-		write_file(curr, batchSize, batchStep, prev_filename, ss, outputPath);
+		ShiftComputeAtCurr(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, prev_filename, outputPath, mainSignal, active, i);
 	}
 }
-
-
 
 int main(int argc, char** argv)
 {
