@@ -11,20 +11,24 @@
 #include <windows.h>
 #include <algorithm>
 #include <cmath>
+#include <map>
 
 #define float double
 
-float* cpgpu_correlation_mat(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives);
+float* cpu_correlation_mat(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives);
 void SplitByBatches(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep,
 	int mainSignal, std::vector<int>& actives, std::string filename, int currentShift, std::string outputPath);
 
 float* cpgpu_correlation_spearmanr(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives);
 
 
+size_t index_of(float* arr, float val, int len, int start = 0)
+{
+	return  std::distance(arr, std::find(arr + start, arr + len, val));
+}
 
-
-void rankify_parallel(float* X, int n, float* res) {
-
+void rankify_parallel(float* X, int n, float* res)
+{
 #pragma omp parallel for
 	for (int i = 0; i < n; i++)
 	{
@@ -32,7 +36,7 @@ void rankify_parallel(float* X, int n, float* res) {
 
 		// Count no of smaller elements 
 		// in 0 to i-1 
-		for (int j = 0; j < i; j++) 
+		for (int j = 0; j < i; j++)
 		{
 			if (X[j] < X[i]) r++;
 			if (X[j] == X[i]) s++;
@@ -40,7 +44,7 @@ void rankify_parallel(float* X, int n, float* res) {
 
 		// Count no of smaller elements 
 		// in i+1 to N-1 
-		for (int j = i + 1; j < n; j++) 
+		for (int j = i + 1; j < n; j++)
 		{
 			if (X[j] < X[i]) r++;
 			if (X[j] == X[i]) s++;
@@ -52,10 +56,83 @@ void rankify_parallel(float* X, int n, float* res) {
 	}
 }
 
+void rank(double* f,int n, double* fr)
+{
+	double* a = new double[n];
+	for (int i = 0; i < n; i++)
+	{
+		a[i] = f[i];
+	}
+
+	std::sort(a, a + n);
+	
+	for (int i = 0; i < n; i++)
+	{
+	
+		int index;
+		if (i < n - 1 && a[i] == a[i + 1])
+		{
+			index = 0;
+			int counter = 2;
+			double mean;
+			double mean_i;
+			mean_i = i + 1.0;
+			mean = i + 1.0;
+			int j = i;
+			do
+			{
+				j++;
+				if (j < n - 1 && a[j] == a[j + 1])
+				{
+					counter++;
+				}
+			} while (j < n - 1 && a[j] == a[j + 1]);
+			for (int n = 1; n < counter; n++)
+			{
+				mean_i++;
+				mean += mean_i;
+			}
+			mean = mean / counter;
+			for (int n = 0; n < counter; n++)
+			{
+				index = index_of(f, a[i], n, index);
+				fr[index] = mean;
+				index++;
+			}
+			i += counter - 1;
+		}
+		else
+		{
+			int index_s = index_of(f, a[i], n);
+			fr[index_s] = i + 1;
+		}
+	}
+}
 
 
-// function that returns 
-// Pearson correlation coefficient. 
+float counter(float* ranks, int n) {
+	std::map<float, unsigned int> rv;
+
+	float sum = 0.0;
+	
+	for (size_t i = 0; i < n; i++)
+	{
+		rv[ranks[i]]++;
+	}
+		
+	for (auto elem : rv)
+	{
+		if (elem.second > 1)
+		{
+			sum += 1.0 / 12.0 * (elem.first * elem.first * elem.first - elem.first);
+		}
+	}
+	
+	
+	return sum;
+}
+
+
 float correlationCoefficient(float* rank_X, float* rank_Y, int n)
 {
 	float sum = 0.0f;
@@ -63,39 +140,17 @@ float correlationCoefficient(float* rank_X, float* rank_Y, int n)
 #pragma omp parallel for schedule(static) reduction (+:sum)
 	for (int i = 0; i < n; i++)
 	{
-		sum += (rank_X[i] - rank_Y[i]) * (rank_X[i] - rank_Y[i]);
+		sum += pow((rank_X[i] - rank_Y[i]) ,2);
 	}
 
-	return  1 - 6 * sum / (n * n * n - n);
-}
-
-
-
-float correlation(float* x, float* y, int n)
-{
-	float avg_x = 0, avg_y = 0;
-
-	for (int i = 0; i < n; i++)
-	{
-		avg_x += x[i];
-		avg_y += y[i];
-	}
-	avg_x /= n;
-	avg_y /= n;
-
+	float additional_res = 0;
+	auto repeat_x = counter(rank_X, n);
+	auto repeat_y = counter(rank_Y, n);
 	
-	float x_sum_error = 0, y_sum_error = 0, pairwise_sum = 0;
-#pragma omp parallel for schedule(static) reduction (+:x_sum_error, y_sum_error, pairwise_sum) shared(avg_x, avg_y)
-	for (int i = 0; i < n; i++)
-	{
-		x_sum_error += (x[i] - avg_x) * (x[i] - avg_x);
-		y_sum_error += (y[i] - avg_y) * (y[i] - avg_y);
-		pairwise_sum += (x[i] - avg_x) * (y[i] - avg_y);
-	}
-
-
-	return pairwise_sum / sqrtf(x_sum_error * y_sum_error);
+	return  1.0 - 6.0 * ((sum + repeat_x + repeat_y) / (float)(n * n * n - n));
 }
+
+
 
 
 inline float round6p(float x)
@@ -197,8 +252,8 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 	
 	for (int i = 1; i < leftShift + 1; i ++)
 	{
-		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, -i, outputPath);
 		circularShift(currentShiftSignals[mainSignal], n, -shiftWidth);
+		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, -i, outputPath);
 	}
 	// Normalize 
 	for (int i = 1; i < leftShift + 1; i++)
@@ -216,20 +271,6 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 
 
 
-
-float* cpgpu_correlation_mat(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives)
-{
-
-	float* result = (float*)malloc(actives.size() * sizeof(float));
-	
-	for (int i = 0; i < actives.size(); i++)
-	{
-		result[i] = correlation(signals[mainSignal], signals[actives[i]], n);
-	}
-	
-	return result;
-}
-
 float* cpgpu_correlation_spearmanr(float** signals, int n, int signal_count, int mainSignal, std::vector<int>& actives)
 {
 
@@ -240,6 +281,7 @@ float* cpgpu_correlation_spearmanr(float** signals, int n, int signal_count, int
 
 
 	rankify_parallel(signals[mainSignal], n, rank_x);
+
 	for (int i = 0; i < actives.size(); i++)
 	{
 

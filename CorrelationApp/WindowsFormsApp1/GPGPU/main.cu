@@ -72,7 +72,7 @@ __device__ float full_correlate(float* x, float* y, int n)
 __device__ float* current_signal_wnd(float* signals, int signal_count, int n, int window_size, int window_step, int blockId, int threadId)
 {
 	float* result = (float*)malloc(window_size * sizeof(float));
-	int window_count = (int)(n - window_size) / window_step;
+	int window_count = (int)(n - window_size) / window_step + 1;
 
 	for(int i = 0; i < window_size; i++)
 	{
@@ -90,10 +90,10 @@ __global__ void window_slide_correlations(float* signals, unsigned int n, int si
 	int block_grid_id = blockIdx.x;
 	int threadId = threadIdx.x;
 
-	for(int block_p = 0; block_p < (int)(n - window_size) / window_step; block_p+=50)
+	for(int block_p = 0; block_p < (int)(n - window_size) / window_step + 1; block_p+=50)
 	{
 		
-		if(block_grid_id < (int)(n - window_size) / window_step)
+		if(block_grid_id < (int)(n - window_size) / window_step + 1)
 		{
 			
 		
@@ -128,7 +128,7 @@ void circularShift(float* a, int size, int shift)
 
 float* wrap_singals_to_array_wnd(float** signals, int n, int signal_count, int window_size, int window_step)
 {
-    int window_count = (int)(n - window_size) / window_step;
+    int window_count = (int)(n - window_size) / window_step + 1;
 
     float* allocated_res = (float*)malloc(signal_count * window_size * window_count * sizeof(float));
 	
@@ -151,7 +151,7 @@ float* wrap_singals_to_array_wnd(float** signals, int n, int signal_count, int w
 
 float* get_correlations_shift(float** signals, int signals_count, int n, int window_size, int window_step, int* active_signals, unsigned int active_count, int main_signal)
 {
-	int window_count = (int)(n - window_size) / window_step;
+	int window_count = (int)(n - window_size) / window_step + 1;
 
 
 	float* splitted_by_windows = wrap_singals_to_array_wnd(signals, n, signals_count, window_size, window_step);
@@ -210,13 +210,16 @@ void ShiftComputeAtCurr(float** currentShiftSignals, int n, int signalCount, int
 		ss << "Active  " << actives[i] << "\t\t";
 	}
 	ss << std::endl;
-
+	if(curr != 0)
+	{
+		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
+	}
 	
 	float * res = get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal);
-	circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
+	
 	
 
-	int window_count = (int)(n - batchSize) / batchStep;
+	int window_count = (int)(n - batchSize) / batchStep + 1;
 	std::string temp = "";
 	for(int i = 0; i < window_count; i++)
 	{
@@ -251,8 +254,7 @@ void ShiftComputeAtCurr(float** currentShiftSignals, int n, int signalCount, int
 void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int leftShift, int rightShift, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
 	int mainSignal, std::vector<int>& active)
 {
-	//Zero Shift
-	ShiftComputeAtCurr(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, prev_filename, outputPath, mainSignal, active, 0);
+	
 
 	//left Shift
 	for(int i = 1; i < leftShift + 1; i++)
@@ -264,9 +266,10 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 	{
 		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
 	}
-
+	//Zero Shift
+	ShiftComputeAtCurr(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, prev_filename, outputPath, mainSignal, active, 0);
 	//Right Shift
-	for(int i = 1; i < leftShift + 1; i++)
+	for(int i = 1; i < rightShift + 1; i++)
 	{
 		ShiftComputeAtCurr(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, prev_filename, outputPath, mainSignal, active, i);
 	}
