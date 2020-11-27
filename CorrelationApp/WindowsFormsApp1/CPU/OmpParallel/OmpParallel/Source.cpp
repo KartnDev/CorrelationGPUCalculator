@@ -29,7 +29,7 @@ size_t index_of(float* arr, float val, int len, int start = 0)
 
 void rankify_parallel(float* X, int n, float* res)
 {
-#pragma omp parallel for
+
 	for (int i = 0; i < n; i++)
 	{
 		int r = 1, s = 1;
@@ -110,28 +110,6 @@ void rank(double* f,int n, double* fr)
 }
 
 
-float counter(float* ranks, int n) {
-	std::map<float, unsigned int> rv;
-
-	float sum = 0.0;
-	
-	for (size_t i = 0; i < n; i++)
-	{
-		rv[ranks[i]]++;
-	}
-		
-	for (auto elem : rv)
-	{
-		if (elem.second > 1)
-		{
-			sum += 1.0 / 12.0 * (elem.first * elem.first * elem.first - elem.first);
-		}
-	}
-	
-	
-	return sum;
-}
-
 
 float correlationCoefficient(float* rank_X, float* rank_Y, int n)
 {
@@ -144,10 +122,8 @@ float correlationCoefficient(float* rank_X, float* rank_Y, int n)
 	}
 
 	float additional_res = 0;
-	auto repeat_x = counter(rank_X, n);
-	auto repeat_y = counter(rank_Y, n);
 	
-	return  1.0 - 6.0 * ((sum + repeat_x + repeat_y) / (float)(n * n * n - n));
+	return  1.0 - 6.0 * ((sum) / (float)(n * n * n - n));
 }
 
 
@@ -157,6 +133,7 @@ inline float round6p(float x)
 {
 	return roundf(x * 1000000) / 1000000;
 }
+
 void write_file(int curr_shift, int batchSize, int batchStep, std::string prev_filename, std::stringstream& ss, std::string outputPath)
 {
 
