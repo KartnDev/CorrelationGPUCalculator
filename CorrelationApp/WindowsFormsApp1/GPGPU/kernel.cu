@@ -287,7 +287,25 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, i, outputPath);
 	}
 }
+char GetCurrentSeparator(std::string filepath)
+{
+	std::ifstream ifs(filepath, std::ios::in);
+	if (!ifs.is_open()) { // couldn't read file.. probably want to handle it.
+		throw new std::exception("Bad file format!");;
+	}
+	std::string firstLine((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
+	ifs.close();
+	
+	for(auto sep : " \t,") // TODO all separators here
+	{
+		if (firstLine.find(sep) != std::string::npos)
+		{
+			return sep;
+		}
+	}
 
+	throw new std::exception("Bad file format!");
+}
 
 
 int main(int argc, char** argv)
@@ -321,7 +339,7 @@ int main(int argc, char** argv)
 		return -2;
 	}
 
-
+	char separator = GetCurrentSeparator(argv[1]);
 	std::string line, val;
 	std::vector<std::vector<float>> array;
 
@@ -329,7 +347,7 @@ int main(int argc, char** argv)
 	{
 		std::vector<float> v;
 		std::stringstream s(line);
-		while (getline(s, val, ' '))
+		while (getline(s, val, separator))
 		{
 			v.push_back(std::stof(val));
 		}

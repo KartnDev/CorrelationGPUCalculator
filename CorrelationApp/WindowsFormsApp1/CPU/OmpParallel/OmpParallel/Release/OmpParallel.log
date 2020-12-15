@@ -4,11 +4,11 @@ C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\Windows
 C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(182,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(189,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(262,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(334,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(352,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(355,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(373,20): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  22 of 416 functions ( 5.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    42 functions had inline decision re-evaluated but remain unchanged
+  131 of 438 functions (29.9%) were compiled, the rest were copied from previous compilation.
+    24 functions were new in current compilation
+    53 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   OmpParallel.vcxproj -> C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\Release\OmpParallel.exe
