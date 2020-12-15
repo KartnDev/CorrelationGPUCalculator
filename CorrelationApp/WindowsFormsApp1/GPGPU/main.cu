@@ -297,8 +297,9 @@ char GetCurrentSeparator(std::string filepath)
 }
 
 
+
 int main(int argc, char** argv)
-{	
+{
 	if (argc < 8)
 	{
 		std::cerr << "Bad parameters... Argc: " << argc << std::endl;
@@ -309,6 +310,8 @@ int main(int argc, char** argv)
 		system("pause");
 		return -1;
 	}
+	std::string filepath = argv[1];
+	std::string outputFilepath = argv[8];
 
 	int mainSignal = std::stoi(argv[9]);
 	std::vector<int> actives;
@@ -318,8 +321,15 @@ int main(int argc, char** argv)
 		actives.push_back(std::stoi(argv[i]));
 	}
 
+	std::cout << filepath << "\n";
+	
 	std::ifstream f;
-	f.open(argv[1]);
+	std::replace(filepath.begin(), filepath.end(), '+', ' ');
+	std::replace(outputFilepath.begin(), outputFilepath.end(), '+', ' ');
+
+	std::cout << filepath << "\n";
+	
+	f.open(filepath);
 
 	if (!f.good())
 	{
@@ -332,9 +342,9 @@ int main(int argc, char** argv)
 	std::string line, val;
 	std::vector<std::vector<float>> array;
 
-	char separator = GetCurrentSeparator(argv[1]);
-	
-	
+	char separator = GetCurrentSeparator(filepath);
+
+
 	while (std::getline(f, line))
 	{
 		std::vector<float> v;
@@ -368,9 +378,9 @@ int main(int argc, char** argv)
 
 	std::cout << "Start Computing..." << std::endl;
 	auto start = std::chrono::high_resolution_clock::now();
-	
-	ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]), std::stoi(argv[3]), std::stoi(argv[4]), std::stoi(argv[5]), std::stoi(argv[6]), argv[7],  argv[8], mainSignal, actives);
-	
+
+	ShiftCompute(h_x, n, signal_count, std::stoi(argv[2]), std::stoi(argv[3]), std::stoi(argv[4]), std::stoi(argv[5]), std::stoi(argv[6]), argv[7], outputFilepath, mainSignal, actives);
+
 	auto stop = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 

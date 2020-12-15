@@ -25,7 +25,10 @@ namespace WindowsFormsApp1.DeviceComputes
             }
             string absPath = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()));
             string filename = $@"{absPath}\GPGPU\a.exe";
-            string @params = $"\"{pathNamePath}\" {shiftWidth} {shiftLeft} {shiftRight} {batchSize} {batchStep} \"{prevName}\" \"{outputFolder}\" {mainSignal}{activesStr}";
+            
+            string @params = $"{pathNamePath.Replace(" ", "+")} {shiftWidth} {shiftLeft} " +
+                             $"{shiftRight} {batchSize} {batchStep} {prevName} " +
+                             $"{outputFolder.Replace(" ", "+")} {mainSignal}{activesStr}";
 
             var proc = System.Diagnostics.Process.Start(filename,@params);
         }
