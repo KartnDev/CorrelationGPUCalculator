@@ -24,22 +24,15 @@
   <component name="ChangeListManager">
     <list default="true" id="b492883a-46f0-4598-8252-a4da2b8ab59d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WindowsFormsApp1/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/.suo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/.vs/OmpParallel/v16/Browse.VC.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.log" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/CL.command.1.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/CL.read.1.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/OmpParallel.write.1u.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/OmpParallel.tlog/OmpParallel.write.1u.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/Source.obj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/Source.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/vc142.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Release/vc142.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Source.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/OmpParallel/Source.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.iobj" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.iobj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.ipdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.ipdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/CPU/OmpParallel/Release/OmpParallel.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/a.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/kernel.cu" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/kernel.cu" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/main.cu" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/GPGPU/main.cu" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/bin/Debug/WindowsFormsApp1.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/WindowsFormsApp1/obj/Debug/WindowsFormsApp1.pdb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +76,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5359CB8D-B5E0-4565-8CCE-390E47AF0E93/14/d907f279/ManagementException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/37/b5f7e888/eArchitecture.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/45/6585cb0e/Control.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/63DD8BF9-8CFA-4BA9-85AF-735EF1A56BA9/51/9b8eeba4/Double.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5F2F19A4-53FC-4FB5-B76D-789F5CEA755E/68/9fcfee8e/CompileProperties.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/d4/95778607/NativeWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/215F2307-E820-492D-A272-E3ABA04F3DFF/e3/105ab9b8/Application.cs" root0="FORCE_HIGHLIGHTING" />
@@ -111,9 +105,9 @@
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/OpenBLASCompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CPUCompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/IComputeDevice.cs" />
-        <option value="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" />
-        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" />
         <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CppCPUCompute.cs" />
+        <option value="$PROJECT_DIR$/WindowsFormsApp1/DeviceComputes/CUDACompute.cs" />
+        <option value="$PROJECT_DIR$/WindowsFormsApp1/Form1.cs" />
       </list>
     </option>
   </component>
@@ -187,7 +181,7 @@
       <workItem from="1605616288356" duration="6406000" />
       <workItem from="1605681144840" duration="2464000" />
       <workItem from="1606504987660" duration="2007000" />
-      <workItem from="1608034699034" duration="6761000" />
+      <workItem from="1608034699034" duration="10619000" />
     </task>
     <servers />
   </component>
@@ -224,22 +218,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="150" y="104" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604397520542" />
-    <state width="1877" height="223" key="GridCell.Tab.0.bottom" timestamp="1608043405563">
+    <state width="1877" height="223" key="GridCell.Tab.0.bottom" timestamp="1608053115957">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="223" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608043405563" />
-    <state width="1877" height="223" key="GridCell.Tab.0.center" timestamp="1608043405563">
+    <state width="1877" height="223" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608053115957" />
+    <state width="1877" height="223" key="GridCell.Tab.0.center" timestamp="1608053115957">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="223" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608043405563" />
-    <state width="1877" height="223" key="GridCell.Tab.0.left" timestamp="1608043405563">
+    <state width="1877" height="223" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608053115957" />
+    <state width="1877" height="223" key="GridCell.Tab.0.left" timestamp="1608053115957">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="223" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608043405563" />
-    <state width="1877" height="223" key="GridCell.Tab.0.right" timestamp="1608043405563">
+    <state width="1877" height="223" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608053115957" />
+    <state width="1877" height="223" key="GridCell.Tab.0.right" timestamp="1608053115957">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="223" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608043405563" />
+    <state width="1877" height="223" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608053115957" />
     <state width="1877" height="370" key="GridCell.Tab.1.bottom" timestamp="1608041771446">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -352,32 +346,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/WindowsFormsApp1/Form1.cs</url>
-          <line>85</line>
-          <properties documentPath="C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\Form1.cs" initialLine="85">
-            <startOffsets>
-              <option value="2488" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2515" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/WindowsFormsApp1/Form1.cs</url>
-          <line>88</line>
-          <properties documentPath="C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\Form1.cs" initialLine="88">
-            <startOffsets>
-              <option value="2618" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2619" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

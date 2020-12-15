@@ -293,13 +293,7 @@ char GetCurrentSeparator(std::string filepath)
 
 
 int main(int argc, char** argv)
-{
-	for (int i = 0; i < argc; i++)
-	{
-		std::cout << argv[i] << std::endl;
-	}
-	system("pause");
-	
+{	
 	if (argc < 8)
 	{
 		std::cerr << "Bad parameters... Argc: " << argc << std::endl;

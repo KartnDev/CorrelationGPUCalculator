@@ -276,7 +276,6 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 	}
 }
 
-
 char GetCurrentSeparator(std::string filepath)
 {
 	std::ifstream ifs(filepath, std::ios::in);
@@ -297,9 +296,9 @@ char GetCurrentSeparator(std::string filepath)
 	throw new std::exception("Bad file format!");
 }
 
+
 int main(int argc, char** argv)
-{
-	system("pause");
+{	
 	if (argc < 8)
 	{
 		std::cerr << "Bad parameters... Argc: " << argc << std::endl;
@@ -334,7 +333,8 @@ int main(int argc, char** argv)
 	std::vector<std::vector<float>> array;
 
 	char separator = GetCurrentSeparator(argv[1]);
-
+	
+	
 	while (std::getline(f, line))
 	{
 		std::vector<float> v;
@@ -342,23 +342,15 @@ int main(int argc, char** argv)
 		while (getline(s, val, separator))
 		{
 			std::replace(val.begin(), val.end(), ',', '.');
-			v.push_back(std::stof(val));
+			v.push_back(std::stod(val));
 		}
 		array.push_back(v);
 	}
-	
 
 	unsigned int n = array.size();
 	int signal_count = array[0].size();
 
-	for(int i = 0; i < signal_count; i++)
-	{
-		for(int j = 0; j < n; j++)
-		{
-			std::cout << array[i][j] << std::endl;
-		}
-	}
-	system("pause");
+
 	float** h_x = (float**)malloc(signal_count * sizeof(float*));
 
 	for (int i = 0; i < signal_count; i++)
@@ -373,7 +365,6 @@ int main(int argc, char** argv)
 			h_x[j][i] = array[i][j];
 		}
 	}
-	
 
 	std::cout << "Start Computing..." << std::endl;
 	auto start = std::chrono::high_resolution_clock::now();
