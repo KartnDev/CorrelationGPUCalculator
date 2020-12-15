@@ -287,6 +287,7 @@ void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shift
 		SplitByBatches(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, mainSignal, actives, prev_filename, i, outputPath);
 	}
 }
+
 char GetCurrentSeparator(std::string filepath)
 {
 	std::ifstream ifs(filepath, std::ios::in);
@@ -310,6 +311,7 @@ char GetCurrentSeparator(std::string filepath)
 
 int main(int argc, char** argv)
 {
+	system("pause");
 	if (argc < 8)
 	{
 		std::cerr << "Bad parameters... Argc: " << argc << std::endl;

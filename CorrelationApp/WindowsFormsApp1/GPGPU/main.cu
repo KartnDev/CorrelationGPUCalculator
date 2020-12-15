@@ -133,6 +133,8 @@ float* wrap_singals_to_array_wnd(float** signals, int n, int signal_count, int w
     float* allocated_res = (float*)malloc(signal_count * window_size * window_count * sizeof(float));
 	
 
+
+
 	for(int sig_ind = 0; sig_ind < signal_count; sig_ind++)
 	{
 		for(int curr_wnd = 0; curr_wnd < window_count; curr_wnd++)
@@ -153,9 +155,7 @@ float* get_correlations_shift(float** signals, int signals_count, int n, int win
 {
 	int window_count = (int)(n - window_size) / window_step + 1;
 
-
 	float* splitted_by_windows = wrap_singals_to_array_wnd(signals, n, signals_count, window_size, window_step);
-
 
 	float* device_data;
 	float* device_result;
@@ -201,6 +201,8 @@ inline float round6p(float x)
 void ShiftComputeAtCurr(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
 	int mainSignal, std::vector<int>& actives, int curr)
 {
+
+
 	int* activesArr = &actives[0];
 
 	
@@ -214,11 +216,9 @@ void ShiftComputeAtCurr(float** currentShiftSignals, int n, int signalCount, int
 	{
 		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
 	}
-	
+
 	float * res = get_correlations_shift(currentShiftSignals, signalCount, n, batchSize, batchStep, activesArr, actives.size(), mainSignal);
 	
-	
-
 	int window_count = (int)(n - batchSize) / batchStep + 1;
 	std::string temp = "";
 	for(int i = 0; i < window_count; i++)
@@ -254,18 +254,19 @@ void ShiftComputeAtCurr(float** currentShiftSignals, int n, int signalCount, int
 void ShiftCompute(float** currentShiftSignals, int n, int signalCount, int shiftWidth, int leftShift, int rightShift, int batchSize, int batchStep, std::string prev_filename, std::string outputPath,
 	int mainSignal, std::vector<int>& active)
 {
-	
 
 	//left Shift
 	for(int i = 1; i < leftShift + 1; i++)
 	{
 		ShiftComputeAtCurr(currentShiftSignals, n, signalCount, -shiftWidth, batchSize, batchStep, prev_filename, outputPath, mainSignal, active, -i);
 	}
+
 	// Zeroing the shift
 	for(int i = 1; i < leftShift + 1; i++)
 	{
 		circularShift(currentShiftSignals[mainSignal], n, shiftWidth);
 	}
+	
 	//Zero Shift
 	ShiftComputeAtCurr(currentShiftSignals, n, signalCount, shiftWidth, batchSize, batchStep, prev_filename, outputPath, mainSignal, active, 0);
 	//Right Shift
@@ -298,6 +299,7 @@ char GetCurrentSeparator(std::string filepath)
 
 int main(int argc, char** argv)
 {
+	system("pause");
 	if (argc < 8)
 	{
 		std::cerr << "Bad parameters... Argc: " << argc << std::endl;
@@ -339,15 +341,24 @@ int main(int argc, char** argv)
 		std::stringstream s(line);
 		while (getline(s, val, separator))
 		{
+			std::replace(val.begin(), val.end(), ',', '.');
 			v.push_back(std::stof(val));
 		}
 		array.push_back(v);
 	}
+	
 
 	unsigned int n = array.size();
 	int signal_count = array[0].size();
 
-
+	for(int i = 0; i < signal_count; i++)
+	{
+		for(int j = 0; j < n; j++)
+		{
+			std::cout << array[i][j] << std::endl;
+		}
+	}
+	system("pause");
 	float** h_x = (float**)malloc(signal_count * sizeof(float*));
 
 	for (int i = 0; i < signal_count; i++)
@@ -362,6 +373,7 @@ int main(int argc, char** argv)
 			h_x[j][i] = array[i][j];
 		}
 	}
+	
 
 	std::cout << "Start Computing..." << std::endl;
 	auto start = std::chrono::high_resolution_clock::now();

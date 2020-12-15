@@ -4,11 +4,18 @@ C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\Windows
 C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(182,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(189,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(262,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(355,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(373,20): warning C4018: '<': signed/unsigned mismatch
-  Generating code
-  131 of 438 functions (29.9%) were compiled, the rest were copied from previous compilation.
-    24 functions were new in current compilation
-    53 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  OmpParallel.vcxproj -> C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\Release\OmpParallel.exe
+C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(362,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Dmitry\Documents\GitHub\CorrelationGPUCalculator\CorrelationApp\WindowsFormsApp1\CPU\OmpParallel\OmpParallel\Source.cpp(380,20): warning C4018: '<': signed/unsigned mismatch
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003: The specified task executable "CL.exe" could not be run. System.IO.IOException: The requested operation cannot be performed on a file with a user-mapped section open.
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003: 
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003:    at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003:    at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003:    at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003:    at System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003:    at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003:    at System.IO.File.InternalWriteAllText(String path, String contents, Encoding encoding, Boolean checkHost)
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003:    at System.IO.File.WriteAllText(String path, String contents, Encoding encoding)
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003:    at Microsoft.Build.Utilities.CanonicalTrackedInputFiles.SaveTlog(DependencyFilter includeInTLog)
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003:    at Microsoft.Build.CPPTasks.CL.PostExecuteTool(Int32 exitCode)
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003:    at Microsoft.Build.CPPTasks.TrackedVCToolTask.ExecuteTool(String pathToTool, String responseFileCommands, String commandLineCommands)
+C:\Program Files (x86)\Microsoft Visual Studio\VS IDE\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(518,5): error MSB6003:    at Microsoft.Build.Utilities.ToolTask.Execute()

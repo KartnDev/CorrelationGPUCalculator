@@ -294,6 +294,12 @@ char GetCurrentSeparator(std::string filepath)
 
 int main(int argc, char** argv)
 {
+	for (int i = 0; i < argc; i++)
+	{
+		std::cout << argv[i] << std::endl;
+	}
+	system("pause");
+	
 	if (argc < 8)
 	{
 		std::cerr << "Bad parameters... Argc: " << argc << std::endl;
@@ -336,7 +342,8 @@ int main(int argc, char** argv)
 		std::stringstream s(line);
 		while (getline(s, val, separator))
 		{
-			v.push_back(std::stof(val));
+			std::replace(val.begin(), val.end(), ',', '.');
+			v.push_back(std::stod(val));
 		}
 		array.push_back(v);
 	}
